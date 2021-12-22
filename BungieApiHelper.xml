@@ -1,0 +1,504 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BungieApiHelper</name>
+    </assembly>
+    <members>
+        <member name="M:BungieApiHelper.Auth.Controller.AuthController.Get">
+            <summary>
+            This endpoint redirect to the bungie login page
+            </summary>
+        </member>
+        <member name="M:BungieApiHelper.Auth.Controller.AuthController.GetResult(System.String,System.String)">
+            <summary>
+            This is the redirection url you have register in the configuration of your api on the developer portail, when you succesfuly log to your bungie account, they'll redirect on this endpoint
+            </summary>
+            <param name="code">code returned by bungie after the authentification process</param>
+            <param name="state">state</param>
+            <returns></returns>
+        </member>
+        <member name="M:BungieApiHelper.Controller.AppController.GetApplicationApiUsage(System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get API usage by application for time frame specified.
+            </summary>
+            <remarks>You can go as far back as 30 days ago, and can ask for up to a 48 hour window of time in a single request. You must be authenticated with at least the ReadUserData permission to access this endpoint.</remarks>
+            <param name="appId">ID of the application to get usage statistics.</param>
+            <param name="start">Start time for query. Goes to 24 hours ago if not specified.</param>
+            <param name="end">End time for query. Goes to now if not specified.</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.AppController.GetBungieApplication">
+            <summary>
+            Get list of applications created by Bungie.
+            </summary>
+        </member>
+        <member name="M:BungieApiHelper.Controller.Auth.UserAuthController.GetCredentialTypesForTargetAccount(System.Int32)">
+            <summary>
+            Returns a list of credential types attached to the requested account
+            </summary>
+            <param name="id">The user's membership id</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.Auth.UserAuthController.GetMembershipsForCurrentUser">
+            <summary>
+            Returns a list of accounts associated with signed in user.
+            </summary>
+            <remarks>This is useful for OAuth implementations that do not give you access to the token response.</remarks>
+        </member>
+        <member name="M:BungieApiHelper.Controller.ContentController.GetContentType(System.String)">
+            <summary>
+            Gets an object describing a particular variant of content.
+            </summary>
+            <param name="type">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.ContentController.GetContentById(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Gets an object describing a particular variant of content.
+            </summary>
+        </member>
+        <member name="M:BungieApiHelper.Controller.ContentController.GetContentByTagAndType(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Returns the newest item that matches a given tag and Content Type.
+            </summary>
+            <param name="tag">Tag used on the content to be searched.</param>
+            <param name="type">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.ContentController.Search(System.String,System.String,System.String,System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            Gets content based on querystring information passed in. Provides basic search and text search capabilities.
+            </summary>
+            <param name="cType">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
+            <param name="searchtext">Word or phrase for the search.</param>
+            <param name="tag">Tag used on the content to be searched.</param>
+            <param name="currentPage">Page number for the search results, starting with page 1.</param>
+            <param name="source">For analytics, hint at the part of the app that triggered the search. Optional.</param>
+            <param name="head"></param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.ContentController.SearchContentByTagAndType(System.String,System.String,System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Searches for Content Items that match the given Tag and Content Type.
+            </summary>
+            <param name="tag">Tag used on the content to be searched.</param>
+            <param name="type">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
+            <param name="itemsperpage">Not used.</param>
+            <param name="currentPage">Page number for the search results starting with page 1.</param>
+            <param name="head">Not used.</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.ContentController.SearchHelpArticles(System.String,System.Int32)">
+            <summary>
+            Search for Help Articles.
+            </summary>
+            <param name="searchtext">Word or phrase for the search.</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.UserController.GetBungieNetUserById(System.Int32)">
+            <summary>
+            Loads a bungienet user by membership id.
+            </summary>
+            <param name="id">The requested Bungie.net membership id.</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.UserController.GetAvailableThemes">
+            <summary>
+            Returns a list of all available user themes.
+            </summary>
+        </member>
+        <member name="M:BungieApiHelper.Controller.UserController.GetMembershipsById(System.Int32,BungieApiHelper.Entity.Bungie.BungieMembershipType)">
+            <summary>
+            Returns a list of accounts associated with the supplied membership ID and membership type.
+            </summary>
+            <remarks>
+            The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.
+            <para> 
+            This will include all linked accounts (even when hidden) if supplied credentials permit it.
+            </para>
+            </remarks>
+            <param name="membershipId">The membership ID of the target user.</param>
+            <param name="membershipType">Type of the supplied membership ID.</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.UserController.GetMembershipFromHardLinkedCredential(BungieApiHelper.Entity.Bungie.BungieCredentialType,System.String)">
+            <summary>
+            Gets any hard linked membership given a credential.
+            </summary>
+            <remarks>
+            Only works for credentials that are public (just SteamID64 right now). Cross Save aware.
+            <para>
+            The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.
+            </para>
+            </remarks>
+            <param name="credential">The credential to look up. Must be a valid SteamID64.</param>
+            <param name="crType">The credential type. 'SteamId' is the only valid value at present.</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.UserController.SearchByGlobalNamePrefix(System.String,System.Int32)">
+            <summary>
+            Allow to search user by entering a prefix of the username
+            </summary>
+            <param name="displayNamePrefix">The display name prefix you're looking for.</param>
+            <param name="page">The zero-based page of results you desire.</param>
+        </member>
+        <member name="M:BungieApiHelper.Controller.UserController.SearchByGlobalNamePost(BungieApiHelper.Entity.User.UserSearchPrefixRequest,System.Int32)">
+            <summary>
+            Given the prefix of a global display name, returns all users who share that name.
+            </summary>
+            <param name="content">Contain the data for the research query</param>
+            <param name="page">The zero-based page of results you desire.</param>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.ApiUsage.apiCalls">
+            <summary>
+            Counts for on API calls made for the time range.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.ApiUsage.throttledRequests">
+            <summary>
+            Instances of blocked requests or requests that crossed the warn threshold during the time range.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.applicationId">
+            <summary>
+            Unique ID assigned to the application
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.name">
+            <summary>
+            Name of the application
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.redirectUrl">
+            <summary>
+            URL used to pass the user's authorization code to the application
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.link">
+            <summary>
+            Link to website for the application where a user can learn more about the app.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.scope">
+            <summary>
+            Permissions the application needs to work
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.origin">
+            <summary>
+            Value of the Origin header sent in requests generated by this application.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.status">
+            <summary>
+            Current status of the application.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.creationDate">
+            <summary>
+            Date the application was first added to our database.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.statusChanged">
+            <summary>
+            Date the application status last changed.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.firstPublished">
+            <summary>
+            Date the first time the application status entered the 'Public' status.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.team">
+            <summary>
+            List of team members who manage this application on Bungie.net. Will always consist of at least the application owner.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Application.Application.overrideAuthorizeViewName">
+            <summary>
+            An optional override for the Authorize view name.
+            </summary>
+        </member>
+        <member name="F:BungieApiHelper.Entity.Application.Datapoint.time">
+            <summary>
+            Timestamp for the related count.
+            </summary>
+        </member>
+        <member name="F:BungieApiHelper.Entity.Application.Datapoint.count">
+            <summary>
+            Count associated with timestamp
+            </summary>
+        </member>
+        <member name="F:BungieApiHelper.Entity.Application.Series.datapoints">
+            <summary>
+            Collection of samples with time and value.
+            </summary>
+        </member>
+        <member name="F:BungieApiHelper.Entity.Application.Series.target">
+            <summary>
+            Target to which to datapoints apply.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Content.ContentItemPublicContract.properties">
+            <summary>
+            Firehose content is really a collection of metadata and "properties", which are the potentially-but-not-strictly localizable data that comprises the meat of whatever content is being shown. As Cole Porter would have crooned, "Anything Goes" with Firehose properties.They are most often strings, but they can theoretically be anything.They are JSON encoded, and could be JSON structures, simple strings, numbers etc... The Content Type of the item (cType) will describe the properties, and thus how they ought to be deserialized.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.LastSeenDisplayName">
+            <summary>
+            This will be the display name the clan server last saw the user as. If the account is an active cross save override, this will be the display name to use. Otherwise, this will match the displayName property.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.LastSeenDisplayNameType">
+            <summary>
+            The platform of the LastSeenDisplayName
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.supplementalDisplayName">
+            <summary>
+            A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.iconPath">
+            <summary>
+            URL the Icon if available.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.crossSaveOverride">
+            <summary>
+            If there is a cross save override in effect, this value will tell you the type that is overridding this one.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.applicableMembershipTypes">
+            <summary>
+            The list of Membership Types indicating the platforms on which this Membership can be used.
+            <para>
+            Not in Cross Save = its original membership type.
+            </para>
+            <para>
+            Cross Save Primary = Any membership types it is overridding, and its original membership type Cross Save Overridden = Empty list
+            </para>
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.isPublic">
+            <summary>
+            If True, this is a public user membership.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.membershipType">
+            <summary>
+            Type of the membership. Not necessarily the native type.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.membershipId">
+            <summary>
+            Membership ID as they user is known in the Accounts service
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.displayName">
+            <summary>
+            Display Name the player has chosen for themselves. The display name is optional when the data type is used as input to a platform API.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.bungieGlobalDisplayName">
+            <summary>
+            The bungie global display name, if set.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.GroupsV2.GroupUserInfoCard.bungieGlobalDisplayNameCode">
+            <summary>
+            The bungie global display name code, if set.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.Unspecified.SearchResultOfContentItemPublicContract.useTotalResults">
+            <summary>
+            This is a long-held historical throwback to when we used to do paging with known total results. Those queries toasted our database, and we were left to hastily alter our endpoints and create backward- compatible shims, of which useTotalResults is one.
+            </summary>
+            <remarks>
+            <para>
+            If useTotalResults is true, then totalResults represents an accurate count.
+            </para>
+            <para>
+            If False, it does not, and may be estimated/only the size of the current page.
+            </para>
+            <para>
+            Either way, you should probably always only trust hasMore.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.supplementalDisplayName">
+            <summary>
+            A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.iconPath">
+            <summary>
+            URL the Icon if available.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.crossSaveOverride">
+            <summary>
+            If there is a cross save override in effect, this value will tell you the type that is overridding this one.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.applicableMembershipTypes">
+            <summary>
+            The list of Membership Types indicating the platforms on which this Membership can be used.
+            <para>
+            Not in Cross Save = its original membership type.
+            </para>
+            <para>
+            Cross Save Primary = Any membership types it is overridding, and its original membership type Cross Save Overridden = Empty list
+            </para>
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.isPublic">
+            <summary>
+            If True, this is a public user membership.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.membershipType">
+            <summary>
+            Type of the membership. Not necessarily the native type.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.membershipId">
+            <summary>
+            Membership ID as they user is known in the Accounts service
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.displayName">
+            <summary>
+            Display Name the player has chosen for themselves. The display name is optional when the data type is used as input to a platform API.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.bungieGlobalDisplayName">
+            <summary>
+            The bungie global display name, if set.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserInfoCard.bungieGlobalDisplayNameCode">
+            <summary>
+            The bungie global display name code, if set.
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserMemberShipData.destinyMemberships">
+            <summary>
+            this allows you to see destiny memberships that are visible and linked to this account (regardless of whether or not they have characters on the world server)
+            </summary>
+        </member>
+        <member name="P:BungieApiHelper.Entity.User.UserMemberShipData.primaryMembershipId">
+            <summary>
+            If this property is populated, it will have the membership ID of the account considered to be "primary" in this user's cross save relationship.
+            <para>
+            If null, this user has no cross save relationship, nor primary account.
+            </para>
+            </summary>
+        </member>
+        <member name="M:BungieApiHelper.Helper.ContentHelper.GetContentType(System.String)">
+            <summary>
+            Gets an object describing a particular variant of content.
+            </summary>
+            <param name="type">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.ContentHelper.GetContentById(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Returns a content item referenced by id
+            </summary>
+        </member>
+        <member name="M:BungieApiHelper.Helper.ContentHelper.GetContentByTagAndType(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Returns the newest item that matches a given tag and Content Type.
+            </summary>
+            <param name="tag">Tag used on the content to be searched.</param>
+            <param name="type">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.ContentHelper.Search(System.String,System.String,System.String,System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            Gets content based on querystring information passed in. Provides basic search and text search capabilities.
+            </summary>
+            <param name="cType">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
+            <param name="searchtext">Word or phrase for the search.</param>
+            <param name="tag">Tag used on the content to be searched.</param>
+            <param name="currentPage">Page number for the search results, starting with page 1.</param>
+            <param name="source">For analytics, hint at the part of the app that triggered the search. Optional.</param>
+            <param name="head"></param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.ContentHelper.SearchContentByTagAndType(System.String,System.String,System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Searches for Content Items that match the given Tag and Content Type.
+            </summary>
+            <param name="tag">Tag used on the content to be searched.</param>
+            <param name="type">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
+            <param name="itemsperpage">Not used.</param>
+            <param name="currentPage">Page number for the search results starting with page 1.</param>
+            <param name="head">Not used.</param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.ContentHelper.SearchHelpArticles(System.String,System.Int32)">
+            <summary>
+            Search for Help Articles.
+            </summary>
+            <param name="searchtext">Word or phrase for the search.</param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.UserHelper.#ctor">
+            <summary>
+            Default Contructor for the UserHelper
+            </summary>
+        </member>
+        <member name="M:BungieApiHelper.Helper.UserHelper.GetBungieNetUserById(System.Int32)">
+            <summary>
+            Loads a bungienet user by membership id.
+            </summary>
+            <param name="id">The requested Bungie.net membership id.</param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.UserHelper.GetCredentialTypesForTargetAccount(System.String,System.Int32)">
+            <summary>
+            Returns a list of credential types attached to the requested account
+            </summary>
+            <param name="token">Oauth token</param>
+            <param name="id">The user's membership id</param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.UserHelper.GetAvailableThemes">
+            <summary>
+            Returns a list of all available user themes.
+            </summary>
+        </member>
+        <member name="M:BungieApiHelper.Helper.UserHelper.GetMembershipsById(System.Int32,BungieApiHelper.Entity.Bungie.BungieMembershipType)">
+            <summary>
+            Returns a list of accounts associated with the supplied membership ID and membership type.
+            </summary>
+            <remarks>
+            The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.
+            <para> 
+            This will include all linked accounts (even when hidden) if supplied credentials permit it.
+            </para>
+            </remarks>
+            <param name="membershipId">The membership ID of the target user.</param>
+            <param name="membershipType">Type of the supplied membership ID.</param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.UserHelper.GetMembershipsForCurrentUser(System.String)">
+            <summary>
+            Returns a list of accounts associated with signed in user.
+            </summary>
+            <param name="token">Oauth token</param>
+            <remarks>This is useful for OAuth implementations that do not give you access to the token response.</remarks>
+        </member>
+        <member name="M:BungieApiHelper.Helper.UserHelper.GetMembershipFromHardLinkedCredential(System.String,BungieApiHelper.Entity.Bungie.BungieCredentialType)">
+            <summary>
+            Gets any hard linked membership given a credential.
+            </summary>
+            <remarks>
+            Only works for credentials that are public (just SteamID64 right now). Cross Save aware.
+            <para>
+            The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.
+            </para>
+            </remarks>
+            <param name="credential">The credential to look up. Must be a valid SteamID64.</param>
+            <param name="crType">The credential type. 'SteamId' is the only valid value at present.</param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.UserHelper.SearchByGlobalNamePrefix(System.String,System.Int32)">
+            <summary>
+            Allow to search user by entering a prefix of the username
+            </summary>
+            <param name="displayNamePrefix">The display name prefix you're looking for.</param>
+            <param name="page">The zero-based page of results you desire.</param>
+        </member>
+        <member name="M:BungieApiHelper.Helper.UserHelper.SearchByGlobalNamePost(BungieApiHelper.Entity.User.UserSearchPrefixRequest,System.Int32)">
+            <summary>
+            Given the prefix of a global display name, returns all users who share that name.
+            </summary>
+            <param name="content">Contain the data for the research query</param>
+            <param name="page">The zero-based page of results you desire.</param>
+        </member>
+    </members>
+</doc>
