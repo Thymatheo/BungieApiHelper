@@ -1,4 +1,6 @@
 # BungieApiHelper
+## Current State [In Dev]
+
 ## About
 This project is a lib, that allow developer to acces the API of bungie for the game destiny 2
 
