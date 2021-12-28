@@ -21,10 +21,10 @@ namespace BungieApiHelper
             _config = Locator.Config;
         }
 
-        protected async Task<BasicResponse<T>> Get<T>(string pathParam, string token = "", string queryParam = "") where T : class =>
+        protected async Task<BasicResponse<T>> Get<T>(string pathParam, string token = "", string queryParam = "") =>
             await ReadRequestResult<T>(BuildRequestMessage(HttpMethodEnum.GET, token, pathParam, queryParam));
 
-        protected async Task<BasicResponse<T>> Post<T>(string pathParam, object content, string token = "", string queryParam = "") where T : class =>
+        protected async Task<BasicResponse<T>> Post<T>(string pathParam, object content, string token = "", string queryParam = "")=>
             await ReadRequestResult<T>(BuildBody(BuildRequestMessage(HttpMethodEnum.POST, token, pathParam, queryParam), content));
 
         private string BuildPath(string pathParam, string queryParam) =>
@@ -51,11 +51,12 @@ namespace BungieApiHelper
             request.Content = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
             return request;
         }
-        private async Task<BasicResponse<T>> ReadRequestResult<T>(HttpRequestMessage request) where T : class
+        private async Task<BasicResponse<T>> ReadRequestResult<T>(HttpRequestMessage request)
         {
             using HttpResponseMessage response = await GetClient().SendAsync(request);
+            var result = await response.Content.ReadAsStringAsync();
             //throw new Exception(await response.Content.ReadAsStringAsync());
-            return JsonConvert.DeserializeObject<BasicResponse<T>>(await response.Content.ReadAsStringAsync(), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            return JsonConvert.DeserializeObject<BasicResponse<T>>(result, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, MaxDepth = null, });
         }
         private HttpClient GetClient()
         {
