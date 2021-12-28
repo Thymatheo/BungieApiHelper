@@ -15,7 +15,7 @@ namespace BungieApiHelper.Entity.Forum
         public IEnumerable<GroupResponse> groups { get; set; }
         public IEnumerable<TagResponse> searchedTags { get; set; }
         public IEnumerable<PollResponse> polls { get; set; }
-        public IEnumerable<ForumRecruitementDetail> recruitmentDetails { get; set; }
+        public IEnumerable<ForumRecruitmentDetail> recruitmentDetails { get; set; }
         public int availablePages { get; set; }
         public IEnumerable<PostResponse> results { get; set; }
         public int totalResults { get; set; }
