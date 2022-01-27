@@ -26,14 +26,6 @@ namespace BungieApiHelper.Helper
             await Get<GeneralUser>($"GetBungieNetUserById/{id}");
 
         /// <summary>
-        /// Returns a list of credential types attached to the requested account
-        /// </summary>
-        /// <param name="token">Oauth token</param>
-        /// <param name="id">The user's membership id</param>
-        public async Task<BasicResponse<IEnumerable<CredentialTypesForAccountResponse>>> GetCredentialTypesForTargetAccount(string token, int id) =>
-            await Get<IEnumerable<CredentialTypesForAccountResponse>>($"GetCredentialTypesForTargetAccount/{id}", token);
-
-        /// <summary>
         /// Returns a list of all available user themes.
         /// </summary>
         public async Task<BasicResponse<IEnumerable<UserTheme>>> GetAvailableThemes() =>
@@ -52,14 +44,6 @@ namespace BungieApiHelper.Helper
         /// <param name="membershipType">Type of the supplied membership ID.</param>
         public async Task<BasicResponse<UserMemberShipData>> GetMembershipsById(int membershipId, BungieMembershipType membershipType) =>
             await Get<UserMemberShipData>($"GetMembershipsById/{membershipId}/{(int)membershipType}");
-
-        /// <summary>
-        /// Returns a list of accounts associated with signed in user.
-        /// </summary>
-        /// <param name="token">Oauth token</param>
-        /// <remarks>This is useful for OAuth implementations that do not give you access to the token response.</remarks>
-        public async Task<BasicResponse<UserMemberShipData>> GetMembershipsForCurrentUser(string token) =>
-            await Get<UserMemberShipData>("GetMembershipsForCurrentUser", token);
 
         /// <summary>
         /// Gets any hard linked membership given a credential.

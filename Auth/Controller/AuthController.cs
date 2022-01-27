@@ -33,6 +33,17 @@ namespace BungieApiHelper.Auth.Controller
             return Redirect(_authHelper.InitAuth(state));
         }
 
+        [HttpGet("UserSessionInfo")]
+        public ActionResult<AuthResponse> GetAuthInfo() => Ok(new AuthResponse()
+        {
+            token_type = "Bearer",
+            membership_id = Request.Cookies["Membership_Id"],
+            expires_in = int.Parse(Request.Cookies["Bearer_Expire"]),
+            refresh_expires_in = int.Parse(Request.Cookies["Refresh_Expire"]),
+            access_token = Request.Cookies["Bearer"],
+            refresh_token = Request.Cookies["Refresh"],
+        });
+
         /// <summary>
         /// This is the redirection url you have register in the configuration of your api on the developer portail, when you succesfuly log to your bungie account, they'll redirect on this endpoint
         /// </summary>
@@ -49,7 +60,7 @@ namespace BungieApiHelper.Auth.Controller
             AddToken(token);
             if (_config.ClientType == AuthTypeEnum.Confidential)
                 AddRefreshToken(token);
-            return Ok(token.access_token);
+            return Ok("Connection successfull");
         }
         [HttpGet("refresh")]
         public async Task<ActionResult> RefreshToken()
@@ -80,14 +91,14 @@ namespace BungieApiHelper.Auth.Controller
         private void AddToken(AuthResponse token)
         {
             Response.Cookies.Append(token.token_type, token.access_token);
-            Response.Cookies.Append($"Bearer_Expire", DateTime.Now.AddSeconds(token.expires_in).ToString());
+            Response.Cookies.Append("Bearer_Expire", token.expires_in.ToString());
             Response.Cookies.Append("Membership_Id", token.membership_id);
         }
 
         private void AddRefreshToken(AuthResponse token)
         {
             Response.Cookies.Append("Refresh", token.refresh_token);
-            Response.Cookies.Append("Refresh_Expire", DateTime.Now.AddSeconds(token.refresh_expires_in).ToString());
+            Response.Cookies.Append("Refresh_Expire", token.refresh_expires_in.ToString());
         }
     }
 }

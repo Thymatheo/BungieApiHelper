@@ -11,6 +11,7 @@ namespace BungieApiHelper
         private string _apiPath;
         private string _clientSecret;
         private AuthTypeEnum? _clientType;
+        private bool? _isApiMode;
 
         public int? ClientId
         {
@@ -42,6 +43,11 @@ namespace BungieApiHelper
         {
             get => _clientType ?? throw new NullReferenceException("Unable to find the Client Type Field in the configuration");
             set => _clientType = value;
+        }
+        public bool IsApiMode
+        {
+            get => _isApiMode ?? throw new NullReferenceException("Unable to find the Api mode Field in the configuration");
+            set => _isApiMode = value;
         }
     }
 

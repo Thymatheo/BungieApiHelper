@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace BungieApiHelper.Controller
 {
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class ForumController : BasicController<ForumHelper>
     {
         /// <summary>

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace BungieApiHelper.Controller
 {
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class AppController : BasicController<AppHelper>
     {
         /// <summary>

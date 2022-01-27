@@ -21,30 +21,24 @@ namespace BungieApiHelper
             _config = Locator.Config;
         }
 
-        protected async Task<BasicResponse<T>> Get<T>(string pathParam, string token = "", string queryParam = "") =>
-            await ReadRequestResult<T>(BuildRequestMessage(HttpMethodEnum.GET, token, pathParam, queryParam));
+        protected async Task<BasicResponse<T>> Get<T>(string pathParam, string queryParam = "") =>
+            await ReadRequestResult<T>(BuildRequestMessage(HttpMethodEnum.GET, pathParam, queryParam));
 
-        protected async Task<BasicResponse<T>> Post<T>(string pathParam, object content, string token = "", string queryParam = "")=>
-            await ReadRequestResult<T>(BuildBody(BuildRequestMessage(HttpMethodEnum.POST, token, pathParam, queryParam), content));
+        protected async Task<BasicResponse<T>> Post<T>(string pathParam, object content,  string queryParam = "")=>
+            await ReadRequestResult<T>(BuildBody(BuildRequestMessage(HttpMethodEnum.POST, pathParam, queryParam), content));
 
         private string BuildPath(string pathParam, string queryParam) =>
             $"{_config.ApiPath}/{ControllerName}{(!string.IsNullOrEmpty(pathParam) ? $"/{pathParam}" : "")}/{(!string.IsNullOrEmpty(queryParam) ? $"?{queryParam}" : "")}";
 
-        private HttpRequestMessage BuildDefaultBungieClient(HttpMethodEnum methodes, string pathParam, string queryParam)
+        protected virtual HttpRequestMessage BuildDefaultBungieClient(HttpMethodEnum methodes, string pathParam, string queryParam)
         {
             HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(methodes.ToString()), BuildPath(pathParam, queryParam));
             request.Headers.Add("X-Api-Key", _config.ApiKey);
             return request;
         }
-        private HttpRequestMessage BuildAuthBungieClient(HttpMethodEnum methodes, string authToken, string pathParam = null, string queryParam = null)
-        {
-            HttpRequestMessage request = BuildDefaultBungieClient(methodes, pathParam, queryParam);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
-            return request;
-        }
 
-        private HttpRequestMessage BuildRequestMessage(HttpMethodEnum methodes, string token = null, string pathParam = null, string queryParam = null) =>
-            string.IsNullOrWhiteSpace(token) ? BuildDefaultBungieClient(methodes, pathParam, queryParam) : BuildAuthBungieClient(methodes, token, pathParam, queryParam);
+        private HttpRequestMessage BuildRequestMessage(HttpMethodEnum methodes, string pathParam = null, string queryParam = null) =>
+            BuildDefaultBungieClient(methodes, pathParam, queryParam);
 
         private HttpRequestMessage BuildBody(HttpRequestMessage request, object content)
         {
@@ -54,9 +48,7 @@ namespace BungieApiHelper
         private async Task<BasicResponse<T>> ReadRequestResult<T>(HttpRequestMessage request)
         {
             using HttpResponseMessage response = await GetClient().SendAsync(request);
-            var result = await response.Content.ReadAsStringAsync();
-            //throw new Exception(await response.Content.ReadAsStringAsync());
-            return JsonConvert.DeserializeObject<BasicResponse<T>>(result, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, MaxDepth = null, });
+            return JsonConvert.DeserializeObject<BasicResponse<T>>(await response.Content.ReadAsStringAsync(), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, MaxDepth = null });
         }
         private HttpClient GetClient()
         {
