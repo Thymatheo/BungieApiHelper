@@ -16,7 +16,7 @@ namespace BungieApiHelper.Helper.Auth
         protected override HttpRequestMessage BuildDefaultBungieClient(HttpMethodEnum methodes, string pathParam, string queryParam)
         {
             HttpRequestMessage request = base.BuildDefaultBungieClient(methodes, pathParam, queryParam);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.Token.access_token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenManager.GetTokenValue());
             return request;
         }
     }

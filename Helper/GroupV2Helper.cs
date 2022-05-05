@@ -77,5 +77,30 @@ namespace BungieApiHelper.Helper
         /// <param name="currentpage">The ID of the group.</param>
         public async Task<BasicResponse<SearchResultOfGroupMember>> AdminsAndFounder(int groupId,int currentpage) =>
             await Get<SearchResultOfGroupMember>($"{groupId}/AdminsAndFounder/{currentpage}");
+        /// <summary>
+        /// Allows a founder to manually recover a group they can see in game but not on bungie.net
+        /// </summary>
+        /// <param name="membershipType">Membership type of the supplied membership ID.</param>
+        /// <param name="membershipId">Membership ID to for which to find founded groups.</param>
+        /// <param name="groupType">Type of group the supplied member founded.</param>
+        public async Task<BasicResponse<GetGroupsForMemberResponse>> GetGroupsForMember(int membershipType, int membershipId, int filter, int groupType) =>
+            await Get<GetGroupsForMemberResponse>($"User/{membershipType}/{membershipId}/{filter}/{groupType}/");
+        /// <summary>
+        /// Allows a founder to manually recover a group they can see in game but not on bungie.net
+        /// </summary>
+        /// <param name="membershipType">Membership type of the supplied membership ID.</param>
+        /// <param name="membershipId">Membership ID to for which to find founded groups.</param>
+        /// <param name="groupType">Type of group the supplied member founded.</param>
+        public async Task<BasicResponse<GroupMembershipSearchResponse>> RecoverGroupForFounder(int membershipType, int membershipId, int groupType) =>
+            await Get<GroupMembershipSearchResponse>($"Recover/{membershipType}/{membershipId}/{groupType}/");
+        /// <summary>
+        /// Get information about the groups that a given member has applied to or been invited to.
+        /// </summary>
+        /// <param name="membershipType">Membership type of the supplied membership ID.</param>
+        /// <param name="membershipId">Membership ID to for which to find applied groups.</param>
+        /// <param name="filter">Filter apply to list of potential joined groups.</param>
+        /// <param name="groupType">Type of group the supplied member applied.</param>
+        public async Task<BasicResponse<GroupPotentialMembershipSearchResponse>> GetPotentialGroupsForMember(int membershipType, int membershipId, int filter, int groupType) =>
+            await Get<GroupPotentialMembershipSearchResponse>($"User/Potentia/{membershipType}/{membershipId}/{filter}/{groupType}/");
     }
 }

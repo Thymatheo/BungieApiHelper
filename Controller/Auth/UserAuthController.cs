@@ -1,12 +1,9 @@
 ﻿using BungieApiHelper.Entity;
 using BungieApiHelper.Entity.User;
 using BungieApiHelper.Entity.User.Models;
-using BungieApiHelper.Helper;
 using BungieApiHelper.Helper.Auth;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BungieApiHelper.Controller.Auth

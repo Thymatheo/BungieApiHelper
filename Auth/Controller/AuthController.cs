@@ -7,17 +7,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace BungieApiHelper.Auth.Controller
-{
-    [ApiController]
+namespace BungieApiHelper.Auth.Controller {
+    [ApiController()]
     [Route("api/[controller]")]
-    public sealed class AuthController : ControllerBase
-    {
+    public sealed class AuthController : ControllerBase {
         private readonly BungieApiHelperConfig _config;
         private readonly IAuthHelper _authHelper;
 
-        public AuthController()
-        {
+        public AuthController() {
             _config = Locator.Config;
             _authHelper = new AuthHelper();
         }
@@ -26,16 +23,14 @@ namespace BungieApiHelper.Auth.Controller
         /// This endpoint redirect to the bungie login page
         /// </summary>
         [HttpGet]
-        public ActionResult Get()
-        {
+        public ActionResult Get() {
             string state = _authHelper.RandomString();
             Response.Cookies.Append("State", state);
             return Redirect(_authHelper.InitAuth(state));
         }
 
         [HttpGet("UserSessionInfo")]
-        public ActionResult<AuthResponse> GetAuthInfo() => Ok(new AuthResponse()
-        {
+        public ActionResult<AuthResponse> GetAuthInfo() => Ok(new AuthResponse() {
             token_type = "Bearer",
             membership_id = Request.Cookies["Membership_Id"],
             expires_in = int.Parse(Request.Cookies["Bearer_Expire"]),
@@ -51,8 +46,7 @@ namespace BungieApiHelper.Auth.Controller
         /// <param name="state">state</param>
         /// <returns></returns>
         [HttpGet("logged")]
-        public async Task<ActionResult> GetResult([FromQuery][Required] string code, [FromQuery][Required] string state)
-        {
+        public async Task<ActionResult> GetResult([FromQuery][Required] string code, [FromQuery][Required] string state) {
             if (Request.Cookies["State"] != state)
                 return BadRequest("The state must be the same !");
             AuthResponse token = await _authHelper.GetToken(code);
@@ -60,14 +54,13 @@ namespace BungieApiHelper.Auth.Controller
             AddToken(token);
             if (_config.ClientType == AuthTypeEnum.Confidential)
                 AddRefreshToken(token);
-            return Ok("Connection successfull");
+            return Redirect(!_config.IsApiMode ? "https://localhost:44307/swagger" : "http://localhost:80/guardianbagpack/");
         }
         [HttpGet("refresh")]
-        public async Task<ActionResult> RefreshToken()
-        {
-            if (_config.ClientType == AuthTypeEnum.Confidential)
-            {
-                AuthResponse token = await _authHelper.RefreshToken(Request.Cookies["Refresh"]);
+        public async Task<ActionResult> RefreshToken() {
+            if (_config.ClientType == AuthTypeEnum.Confidential) {
+                string refresh = Request.Cookies["Refresh"];
+                AuthResponse token = await _authHelper.RefreshToken(refresh);
                 AddToken(token);
                 AddRefreshToken(token);
                 return Ok();
@@ -76,8 +69,7 @@ namespace BungieApiHelper.Auth.Controller
         }
 
         [HttpDelete("loggout")]
-        public ActionResult Loggout()
-        {
+        public ActionResult Loggout() {
             Response.Cookies.Delete("Membership_Id");
             Response.Cookies.Delete("Refresh");
             Response.Cookies.Delete("Refresh_Expire");
@@ -88,15 +80,13 @@ namespace BungieApiHelper.Auth.Controller
             return Ok();
         }
 
-        private void AddToken(AuthResponse token)
-        {
+        private void AddToken(AuthResponse token) {
             Response.Cookies.Append(token.token_type, token.access_token);
             Response.Cookies.Append("Bearer_Expire", token.expires_in.ToString());
             Response.Cookies.Append("Membership_Id", token.membership_id);
         }
 
-        private void AddRefreshToken(AuthResponse token)
-        {
+        private void AddRefreshToken(AuthResponse token) {
             Response.Cookies.Append("Refresh", token.refresh_token);
             Response.Cookies.Append("Refresh_Expire", token.refresh_expires_in.ToString());
         }
