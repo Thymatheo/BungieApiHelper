@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace BungieApiHelper.Entity.GroupsV2
-{
-    public class GroupUserInfoCard
-    {
+namespace BungieApiHelper.Entity.GroupsV2 {
+    public class GroupUserInfoCard {
         /// <summary>
         /// This will be the display name the clan server last saw the user as. If the account is an active cross save override, this will be the display name to use. Otherwise, this will match the displayName property.
         /// </summary>

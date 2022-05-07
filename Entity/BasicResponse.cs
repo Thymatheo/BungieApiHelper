@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace BungieApiHelper.Entity
-{
-    public class BasicResponse<T>
-    {
+namespace BungieApiHelper.Entity {
+    public class BasicResponse<T> {
         public T Response { get; set; }
         public int ErrorCode { get; set; }
         public int ThrottleSeconds { get; set; }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace BungieApiHelper.Entity.Bungie
-{
+namespace BungieApiHelper.Entity.Bungie {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum BungieMembershipType
-    {
+    public enum BungieMembershipType {
         None = 0,
         TigerXbox = 1,
         TigerPsn = 2,

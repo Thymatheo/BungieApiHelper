@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace BungieApiHelper.Entity.Forum
-{
-    public class PollResult
-    {
+namespace BungieApiHelper.Entity.Forum {
+    public class PollResult {
         public string answerText { get; set; }
         public int answerSlot { get; set; }
         public DateTime lastVoteDate { get; set; }

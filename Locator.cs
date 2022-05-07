@@ -6,8 +6,10 @@ using System.Reflection;
 
 namespace BungieApiHelper {
     public static class Locator {
-        public static BungieApiHelperConfig Config { get; set; }
+        public static BungieApiHelperConfig Config { get; private set; }
         public static IServiceProvider Provider { get; private set; }
+        public static void InitConfig(BungieApiHelperConfig config) =>
+            Config = config;
         public static IServiceCollection AddServiceRequierment(this IServiceCollection services, BungieApiHelperConfig config) {
             Config = config;
             services.AddMvcCore().AddApplicationPart(typeof(AppController).GetTypeInfo().Assembly);

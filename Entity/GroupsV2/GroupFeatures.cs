@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace BungieApiHelper.Entity.GroupsV2
-{
-    public class GroupFeatures
-    {
+namespace BungieApiHelper.Entity.GroupsV2 {
+    public class GroupFeatures {
         public int maximumMembers { get; set; }
         /// <summary>
         /// <para>Maximum number of groups of this type a typical membership may join.</para>

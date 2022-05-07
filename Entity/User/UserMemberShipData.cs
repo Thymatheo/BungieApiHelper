@@ -1,12 +1,8 @@
 ﻿using BungieApiHelper.Entity.GroupsV2;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace BungieApiHelper.Entity.User
-{
-    public class UserMemberShipData
-    {
+namespace BungieApiHelper.Entity.User {
+    public class UserMemberShipData {
         /// <summary>
         /// this allows you to see destiny memberships that are visible and linked to this account (regardless of whether or not they have characters on the world server)
         /// </summary>

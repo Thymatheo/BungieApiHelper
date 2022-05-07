@@ -1,12 +1,8 @@
 ﻿using BungieApiHelper.Entity.Queries;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace BungieApiHelper.Entity.GroupsV2
-{
-    public class SearchResultOfGroupMember
-    {
+namespace BungieApiHelper.Entity.GroupsV2 {
+    public class SearchResultOfGroupMember {
         public IEnumerable<GroupMember> results { get; set; }
         public int totalResults { get; set; }
         public bool hasMore { get; set; }

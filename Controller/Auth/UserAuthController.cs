@@ -6,11 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BungieApiHelper.Controller.Auth
-{
+namespace BungieApiHelper.Controller.Auth {
     [ApiExplorerSettings(IgnoreApi = false)]
-    public class UserAuthController :BasicAuthController<UserAuthHelper>
-    {
+    public class UserAuthController : BasicAuthController<UserAuthHelper> {
 
         /// <summary>
         /// Returns a list of credential types attached to the requested account
@@ -20,8 +18,7 @@ namespace BungieApiHelper.Controller.Auth
         /// </remarks>
         /// <param name="id">The user's membership id</param>
         [HttpGet("GetCredentialTypesForTargetAccount/{id}")]
-        public async Task<ActionResult<BasicResponse<IEnumerable<CredentialTypesForAccountResponse>>>> GetCredentialTypesForTargetAccount([FromRoute] int id)
-        {
+        public async Task<ActionResult<BasicResponse<IEnumerable<CredentialTypesForAccountResponse>>>> GetCredentialTypesForTargetAccount([FromRoute] int id) {
             return Ok(await _helper.GetCredentialTypesForTargetAccount(id));
         }
 
@@ -35,8 +32,7 @@ namespace BungieApiHelper.Controller.Auth
         /// </para>
         /// </remarks>
         [HttpGet("GetMembershipsForCurrentUser")]
-        public async Task<ActionResult<BasicResponse<UserMemberShipData>>> GetMembershipsForCurrentUser()
-        {
+        public async Task<ActionResult<BasicResponse<UserMemberShipData>>> GetMembershipsForCurrentUser() {
             return Ok(await _helper.GetMembershipsForCurrentUser());
         }
     }

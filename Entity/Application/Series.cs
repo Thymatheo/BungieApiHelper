@@ -1,7 +1,5 @@
-﻿namespace BungieApiHelper.Entity.Application
-{
-    public class Series
-    {
+﻿namespace BungieApiHelper.Entity.Application {
+    public class Series {
         /// <summary>
         /// Collection of samples with time and value.
         /// </summary>

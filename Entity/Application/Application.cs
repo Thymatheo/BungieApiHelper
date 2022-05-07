@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace BungieApiHelper.Entity.Application
-{
-    public class Application
-    {
+namespace BungieApiHelper.Entity.Application {
+    public class Application {
         /// <summary>
         /// Unique ID assigned to the application
         /// </summary>

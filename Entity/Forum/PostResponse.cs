@@ -1,10 +1,8 @@
 ﻿using BungieApiHelper.Entity.Ignores;
 using System;
 
-namespace BungieApiHelper.Entity.Forum
-{
-    public class PostResponse
-    {
+namespace BungieApiHelper.Entity.Forum {
+    public class PostResponse {
         public DateTime lastReplyTimestamp { get; set; }
         public bool IsPinned { get; set; }
         public int urlMediaType { get; set; }

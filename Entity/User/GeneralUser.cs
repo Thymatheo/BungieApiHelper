@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace BungieApiHelper.Entity.User
-{
-    public class GeneralUser
-    {
+namespace BungieApiHelper.Entity.User {
+    public class GeneralUser {
         public int membershipId { get; set; }
         public string uniqueName { get; set; }
         public string normalizedName { get; set; }

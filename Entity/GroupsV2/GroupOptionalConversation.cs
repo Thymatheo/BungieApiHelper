@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BungieApiHelper.Entity.GroupsV2
-{
-    public class GroupOptionalConversation
-    {
+﻿namespace BungieApiHelper.Entity.GroupsV2 {
+    public class GroupOptionalConversation {
         public int groupId { get; set; }
         public int conversationId { get; set; }
         public bool chatEnabled { get; set; }

@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace BungieApiHelper.Entity.Application
-{
-    public class Datapoint
-    {
+namespace BungieApiHelper.Entity.Application {
+    public class Datapoint {
         /// <summary>
         /// Timestamp for the related count.
         /// </summary>

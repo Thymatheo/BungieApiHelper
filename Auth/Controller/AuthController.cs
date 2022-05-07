@@ -1,10 +1,7 @@
 ﻿using BungieApiHelper.Auth.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace BungieApiHelper.Auth.Controller {
@@ -54,7 +51,7 @@ namespace BungieApiHelper.Auth.Controller {
             AddToken(token);
             if (_config.ClientType == AuthTypeEnum.Confidential)
                 AddRefreshToken(token);
-            return Redirect(!_config.IsApiMode ? "https://localhost:44307/swagger" : "http://localhost:80/guardianbagpack/");
+            return Redirect(_config.IsApiMode ? "https://localhost:44307/swagger" : _config.AppRedirectUrl);
         }
         [HttpGet("refresh")]
         public async Task<ActionResult> RefreshToken() {

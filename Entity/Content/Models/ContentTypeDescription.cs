@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace BungieApiHelper.Entity.Content.Models
-{
-    public class ContentTypeDescription
-    {
+namespace BungieApiHelper.Entity.Content.Models {
+    public class ContentTypeDescription {
         public string cType { get; set; }
         public string name { get; set; }
         public string contentDescription { get; set; }
@@ -14,7 +10,7 @@ namespace BungieApiHelper.Entity.Content.Models
         public string? reminder { get; set; }
         public IEnumerable<ContentTypeProperty> properties { get; set; }
         public IEnumerable<TagMetadataDefinition> tagMetadata { get; set; }
-        public Dictionary<string,TagMetadataItem> tagMetadataItems { get; set; }
+        public Dictionary<string, TagMetadataItem> tagMetadataItems { get; set; }
         public IEnumerable<string> usageExamples { get; set; }
         public bool showInContentEditor { get; set; }
         public string? typeOf { get; set; }

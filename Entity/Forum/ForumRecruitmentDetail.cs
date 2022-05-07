@@ -1,12 +1,8 @@
 ﻿using BungieApiHelper.Entity.User;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace BungieApiHelper.Entity.Forum
-{
-    public class ForumRecruitmentDetail
-    {
+namespace BungieApiHelper.Entity.Forum {
+    public class ForumRecruitmentDetail {
         public int topicId { get; set; }
         public bool microphoneRequired { get; set; }
         public byte intensity { get; set; }

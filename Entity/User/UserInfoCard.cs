@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace BungieApiHelper.Entity.User
-{
-    public class UserInfoCard
-    {
+namespace BungieApiHelper.Entity.User {
+    public class UserInfoCard {
         /// <summary>
         /// A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc.
         /// </summary>

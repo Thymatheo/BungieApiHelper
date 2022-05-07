@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace BungieApiHelper.Entity.Content.Models
-{
-    public class ContentTypeProperty
-    {
+namespace BungieApiHelper.Entity.Content.Models {
+    public class ContentTypeProperty {
         public string name { get; set; }
         public string rootPropertyName { get; set; }
         public string readableName { get; set; }

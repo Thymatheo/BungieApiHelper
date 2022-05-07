@@ -1,12 +1,9 @@
 ﻿using BungieApiHelper.Entity.User;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace BungieApiHelper.Entity.Content
-{
-    public class ContentItemPublicContract
-    {
+namespace BungieApiHelper.Entity.Content {
+    public class ContentItemPublicContract {
         public int contentId { get; set; }
         public string cType { get; set; }
         public string cmsPath { get; set; }

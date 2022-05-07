@@ -1,16 +1,12 @@
 ﻿using BungieApiHelper.Entity;
 using BungieApiHelper.Entity.Content;
 using BungieApiHelper.Entity.Content.Models;
-using BungieApiHelper.Entity.Unspecified;
-using System;
+using BungieApiHelper.Entity.Unspecified.SearchResultOf;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace BungieApiHelper.Helper
-{
-    public class ContentHelper : BasicHelper
-    {
+namespace BungieApiHelper.Helper {
+    public class ContentHelper : BasicHelper {
         public ContentHelper() : base("Content") { }
         /// <summary>
         /// Gets an object describing a particular variant of content.
@@ -23,7 +19,12 @@ namespace BungieApiHelper.Helper
         /// Returns a content item referenced by id
         /// </summary>
         public async Task<BasicResponse<ContentItemPublicContract>> GetContentById(int id, string locale, bool head = false) =>
-            await Get<ContentItemPublicContract>($"GetContentById/{id}/{locale}", queryParam: BuildQueryParam(new List<QueryParam>() { new QueryParam() { Label = "head", Value = head } }));
+            await Get<ContentItemPublicContract>($"GetContentById/{id}/{locale}", queryParam: BuildQueryParam(new() {
+                new() {
+                    Label = "head",
+                    Value = head
+                }
+            }));
 
         /// <summary>
         /// Returns the newest item that matches a given tag and Content Type.
@@ -31,7 +32,12 @@ namespace BungieApiHelper.Helper
         /// <param name="tag">Tag used on the content to be searched.</param>
         /// <param name="type">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
         public async Task<BasicResponse<ContentItemPublicContract>> GetContentByTagAndType(string tag, string type, string locale, bool head = false) =>
-            await Get<ContentItemPublicContract>($"GetContentByTagAndType/{tag}/{type}/{locale}", queryParam: BuildQueryParam(new List<QueryParam>() { new QueryParam() { Label = "head", Value = head } }));
+            await Get<ContentItemPublicContract>($"GetContentByTagAndType/{tag}/{type}/{locale}", queryParam: BuildQueryParam(new() {
+                new() {
+                    Label = "head",
+                    Value = head
+                }
+            }));
 
         /// <summary>
         /// Gets content based on querystring information passed in. Provides basic search and text search capabilities.
@@ -42,17 +48,19 @@ namespace BungieApiHelper.Helper
         /// <param name="currentPage">Page number for the search results, starting with page 1.</param>
         /// <param name="source">For analytics, hint at the part of the app that triggered the search. Optional.</param>
         /// <param name="head"></param>
-        public async Task<BasicResponse<SearchResultOfContentItemPublicContract>> Search(string locale, string cType, string searchtext, string tag, int currentPage = 1, string source = "", bool head = false)
-        {
-            List<QueryParam> param = new List<QueryParam>() {
-                new QueryParam(){ Label = "cType", Value = cType },
-                new QueryParam(){ Label = "searchtext", Value = searchtext },
-                new QueryParam(){ Label = "tag", Value = tag },
-                new QueryParam(){ Label = "head", Value = head  },
-                new QueryParam(){ Label = "currentPage", Value = currentPage  },
+        public async Task<BasicResponse<SearchResultOfContentItemPublicContract>> Search(string locale, string cType, string searchtext, string tag, int currentPage = 1, string source = "", bool head = false) {
+            List<QueryParam> param = new() {
+                new() { Label = "cType", Value = cType },
+                new() { Label = "searchtext", Value = searchtext },
+                new() { Label = "tag", Value = tag },
+                new() { Label = "head", Value = head },
+                new() { Label = "currentPage", Value = currentPage },
             };
             if (!string.IsNullOrWhiteSpace(source))
-                param.Add(new QueryParam() { Label = "source", Value = source });
+                param.Add(new() {
+                    Label = "source",
+                    Value = source
+                });
 
             return await Get<SearchResultOfContentItemPublicContract>($"Search/{locale}", queryParam: BuildQueryParam(param));
         }
@@ -66,10 +74,10 @@ namespace BungieApiHelper.Helper
         /// <param name="currentPage">Page number for the search results starting with page 1.</param>
         /// <param name="head">Not used.</param>
         public async Task<BasicResponse<SearchResultOfContentItemPublicContract>> SearchContentByTagAndType(string tag, string type, string locale, int itemsperpage, int currentPage = 1, bool head = false) =>
-            await Get<SearchResultOfContentItemPublicContract>($"SearchContentByTagAndType/{tag}/{type}/{locale}", queryParam: BuildQueryParam(new List<QueryParam>() {
-                new QueryParam(){ Label = "currentPage", Value = currentPage  },
-                new QueryParam(){ Label = "head", Value = head  },
-                new QueryParam(){ Label = "itemsperpage", Value = itemsperpage  }
+            await Get<SearchResultOfContentItemPublicContract>($"SearchContentByTagAndType/{tag}/{type}/{locale}", queryParam: BuildQueryParam(new() {
+                new() { Label = "currentPage", Value = currentPage },
+                new() { Label = "head", Value = head },
+                new() { Label = "itemsperpage", Value = itemsperpage }
             }));
 
         /// <summary>

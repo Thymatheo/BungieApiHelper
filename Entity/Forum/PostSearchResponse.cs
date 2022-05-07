@@ -2,14 +2,10 @@
 using BungieApiHelper.Entity.Queries;
 using BungieApiHelper.Entity.Tags.Models.Contracts;
 using BungieApiHelper.Entity.User;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace BungieApiHelper.Entity.Forum
-{
-    public class PostSearchResponse
-    {
+namespace BungieApiHelper.Entity.Forum {
+    public class PostSearchResponse {
         public IEnumerable<PostResponse> relatedPosts { get; set; }
         public IEnumerable<GeneralUser> authors { get; set; }
         public IEnumerable<GroupResponse> groups { get; set; }

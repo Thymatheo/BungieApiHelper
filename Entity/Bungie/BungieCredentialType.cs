@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace BungieApiHelper.Entity.Bungie
-{
+namespace BungieApiHelper.Entity.Bungie {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum BungieCredentialType
-    {
+    public enum BungieCredentialType {
         None = 0,
         Xuid = 1,
         Psnid = 2,

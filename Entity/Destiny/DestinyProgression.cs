@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace BungieApiHelper.Entity.Destiny
-{
+namespace BungieApiHelper.Entity.Destiny {
     /// <summary>
     /// <para>Information about a current character's status with a Progression.</para>
     /// <para>A progression is a value that can increase with activity and has levels.</para>
     /// <para>Think Character Level and Reputation Levels.</para>
     /// <para>Combine this "live" data with the related DestinyProgressionDefinition for a full picture of the Progression.</para>
     /// </summary>
-    public class DestinyProgression
-    {
+    public class DestinyProgression {
         /// <summary>
         /// <para>The hash identifier of the Progression in question.</para>
         /// <para>Use it to look up the DestinyProgressionDefinition in static data.</para>

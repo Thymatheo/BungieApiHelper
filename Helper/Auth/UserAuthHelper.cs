@@ -1,15 +1,11 @@
 ﻿using BungieApiHelper.Entity;
 using BungieApiHelper.Entity.User;
 using BungieApiHelper.Entity.User.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace BungieApiHelper.Helper.Auth
-{
-    public class UserAuthHelper : BasicAuthHelper
-    {
+namespace BungieApiHelper.Helper.Auth {
+    public class UserAuthHelper : BasicAuthHelper {
         public UserAuthHelper() : base("User") { }
 
         /// <summary>

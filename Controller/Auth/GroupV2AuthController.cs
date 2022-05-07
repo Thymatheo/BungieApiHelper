@@ -1,9 +1,8 @@
-﻿using BungieApiHelper.Auth.Controller;
-using BungieApiHelper.Entity;
+﻿using BungieApiHelper.Entity;
 using BungieApiHelper.Entity.Bungie;
 using BungieApiHelper.Entity.Entities;
 using BungieApiHelper.Entity.GroupsV2;
-using BungieApiHelper.Entity.Unspecified;
+using BungieApiHelper.Entity.Unspecified.SearchResultOf;
 using BungieApiHelper.Helper.Auth;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -132,7 +131,7 @@ namespace BungieApiHelper.Controller.Auth {
         /// <param name="membershipType">Membership type of the provided membership ID.</param>
         /// <param name="membershipId">Membership ID to kick.</param>
         [HttpPost("{groupId}/Members/{membershipType}/{membershipId}/Kick")]
-        public async Task<ActionResult<BasicResponse<GroupMemberLeave>>> KickMembers([FromRoute] int groupId, [FromRoute] int membershipType, [FromRoute] int membershipId) =>
+        public async Task<ActionResult<BasicResponse<GroupMemberLeave>>> KickMembers([FromRoute] int groupId, [FromRoute] BungieMembershipType membershipType, [FromRoute] int membershipId) =>
            Ok(await _helper.KickMembers(groupId, membershipType, membershipId));
 
         /// <summary>
@@ -145,7 +144,7 @@ namespace BungieApiHelper.Controller.Auth {
         /// <param name="membershipType">Membership ID of the member to ban from the group.</param>
         /// <param name="membershipId">Membership type of the provided membership ID.</param>
         [HttpPost("{groupId}/Members/{membershipType}/{membershipId}/Ban")]
-        public async Task<ActionResult<BasicResponse<int>>> BanMembers([FromRoute] int groupId, [FromRoute] int membershipType, [FromRoute] int membershipId) =>
+        public async Task<ActionResult<BasicResponse<int>>> BanMembers([FromRoute] int groupId, [FromRoute] BungieMembershipType membershipType, [FromRoute] int membershipId) =>
             Ok(await _helper.BanMembers(groupId, membershipType, membershipId));
 
         /// <summary>
@@ -158,7 +157,7 @@ namespace BungieApiHelper.Controller.Auth {
         /// <param name="membershipType">Membership type of the provided membership ID.</param>
         /// <param name="membershipId">Membership ID of the member to unban from the group</param>
         [HttpPost("{groupId}/Members/{membershipType}/{membershipId}/Unban")]
-        public async Task<ActionResult<BasicResponse<int>>> UnBanMembers([FromRoute] int groupId, [FromRoute] int membershipType, [FromRoute] int membershipId) =>
+        public async Task<ActionResult<BasicResponse<int>>> UnBanMembers([FromRoute] int groupId, [FromRoute] BungieMembershipType membershipType, [FromRoute] int membershipId) =>
             Ok(await _helper.UnBanMembers(groupId, membershipType, membershipId));
 
         /// <summary>
@@ -184,7 +183,7 @@ namespace BungieApiHelper.Controller.Auth {
         /// <param name="membershipType">Membership type of the provided founderIdNew.</param>
         /// <param name="founderIdNew">The new founder for this group. Must already be a group admin.</param>
         [HttpPost("{groupId}/Admin/AbdicateFoundership/{membershipType}/{founderIdNew}")]
-        public async Task<ActionResult<BasicResponse<bool>>> AbdicateFoundership([FromRoute] int groupId, [FromRoute] int membershipType, [FromRoute] int founderIdNew) =>
+        public async Task<ActionResult<BasicResponse<bool>>> AbdicateFoundership([FromRoute] int groupId, [FromRoute] BungieMembershipType membershipType, [FromRoute] int founderIdNew) =>
             Ok(await _helper.AbdicateFoundership(groupId, membershipType, founderIdNew));
 
 
@@ -254,7 +253,7 @@ namespace BungieApiHelper.Controller.Auth {
         /// <param name="membershipId">The membership id being approved.</param>
         /// <param name="content"></param>
         [HttpPost("{groupId}/Members/Approve/{membershipType}/{membershipId}")]
-        public async Task<ActionResult<BasicResponse<EntityActionResult>>> ApprovePending([FromRoute] int groupId, [FromRoute] int membershipType, [FromRoute] int membershipId, [FromBody] GroupApplicationRequest content) =>
+        public async Task<ActionResult<BasicResponse<EntityActionResult>>> ApprovePending([FromRoute] int groupId, [FromRoute] BungieMembershipType membershipType, [FromRoute] int membershipId, [FromBody] GroupApplicationRequest content) =>
            Ok(await _helper.ApprovePending(groupId, membershipType, membershipId, content));
 
 
@@ -281,7 +280,7 @@ namespace BungieApiHelper.Controller.Auth {
         /// <param name="membershipId">MembershipType of the account being invited.</param>
         /// <param name="content"></param>
         [HttpPost("{groupId}/Members/IndividualInvite/{membershipType}/{membershipId}")]
-        public async Task<ActionResult<BasicResponse<GroupApplicationResponse>>> IndividualGroupInvite([FromRoute] int groupId, [FromRoute] int membershipType, [FromRoute] int membershipId, [FromBody] GroupApplicationRequest content) =>
+        public async Task<ActionResult<BasicResponse<GroupApplicationResponse>>> IndividualGroupInvite([FromRoute] int groupId, [FromRoute] BungieMembershipType membershipType, [FromRoute] int membershipId, [FromBody] GroupApplicationRequest content) =>
             Ok(await _helper.IndividualGroupInvite(groupId, membershipType, membershipId, content));
 
 
@@ -295,7 +294,7 @@ namespace BungieApiHelper.Controller.Auth {
         /// <param name="membershipType">Membership id of the account being cancelled.</param>
         /// <param name="membershipId">MembershipType of the account being cancelled.</param>
         [HttpPost("{groupId}/Members/IndividualInviteCancel/{membershipType}/{membershipId}")]
-        public async Task<ActionResult<BasicResponse<GroupApplicationResponse>>> IndividualGroupInviteCancel([FromRoute] int groupId, [FromRoute] int membershipType, [FromRoute] int membershipId) =>
+        public async Task<ActionResult<BasicResponse<GroupApplicationResponse>>> IndividualGroupInviteCancel([FromRoute] int groupId, [FromRoute] BungieMembershipType membershipType, [FromRoute] int membershipId) =>
             Ok(await _helper.IndividualGroupInviteCancel(groupId, membershipType, membershipId));
     }
 }

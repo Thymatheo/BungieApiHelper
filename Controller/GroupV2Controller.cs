@@ -1,12 +1,9 @@
 ﻿using BungieApiHelper.Entity;
-using BungieApiHelper.Entity.Bungie;
 using BungieApiHelper.Entity.Config;
 using BungieApiHelper.Entity.GroupsV2;
 using BungieApiHelper.Helper;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BungieApiHelper.Controller {

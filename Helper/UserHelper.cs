@@ -2,17 +2,12 @@
 using BungieApiHelper.Entity.Bungie;
 using BungieApiHelper.Entity.Config;
 using BungieApiHelper.Entity.User;
-using BungieApiHelper.Entity.User.Models;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace BungieApiHelper.Helper
-{
-    public class UserHelper : BasicHelper
-    {
+namespace BungieApiHelper.Helper {
+    public class UserHelper : BasicHelper {
         /// <summary>
         /// Default Contructor for the UserHelper
         /// </summary>

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace BungieApiHelper.Entity.GroupsV2
-{
-    public class GroupV2Card
-    {
+namespace BungieApiHelper.Entity.GroupsV2 {
+    public class GroupV2Card {
         public int groupId { get; set; }
         public string name { get; set; }
         public int groupType { get; set; }

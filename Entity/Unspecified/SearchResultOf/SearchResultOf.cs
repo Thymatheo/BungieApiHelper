@@ -1,9 +1,7 @@
 ﻿using BungieApiHelper.Entity.Queries;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace BungieApiHelper.Entity.Unspecified {
+namespace BungieApiHelper.Entity.Unspecified.SearchResultOf {
     public class SearchResultOf<T> {
 
         public IEnumerable<T> results { get; set; }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace BungieApiHelper.Entity.GroupsV2
-{
-    public class GroupResponse
-    {
+namespace BungieApiHelper.Entity.GroupsV2 {
+    public class GroupResponse {
         public GroupV2 detail { get; set; }
         public GroupMember founder { get; set; }
         public IEnumerable<int> alliedIds { get; set; }

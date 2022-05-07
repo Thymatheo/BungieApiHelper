@@ -1,10 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace BungieApiHelper
-{
+namespace BungieApiHelper.Entity.GroupsV2 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum JoinLevelEnum
-    {
+    public enum JoinLevelEnum {
         None = 0,
         Beginner = 1,
         Member = 2,

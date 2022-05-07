@@ -1,10 +1,8 @@
 ﻿using BungieApiHelper.Entity.User;
 using System;
 
-namespace BungieApiHelper.Entity.GroupsV2
-{
-    public class GroupMember
-    {
+namespace BungieApiHelper.Entity.GroupsV2 {
+    public class GroupMember {
         public int memberType { get; set; }
         public bool isOnline { get; set; }
         public int lastOnlineStatusChange { get; set; }

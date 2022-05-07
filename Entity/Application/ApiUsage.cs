@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace BungieApiHelper.Entity.Application
-{
-    public class ApiUsage
-    {
+namespace BungieApiHelper.Entity.Application {
+    public class ApiUsage {
         /// <summary>
         /// Counts for on API calls made for the time range.
         /// </summary>

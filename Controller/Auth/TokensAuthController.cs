@@ -2,6 +2,7 @@
 using BungieApiHelper.Entity.Tokens;
 using BungieApiHelper.Helper.Auth;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BungieApiHelper.Controller.Auth {
@@ -25,7 +26,20 @@ namespace BungieApiHelper.Controller.Auth {
         /// </remarks>
         /// <param name="partnerApplicationId">The partner application identifier.</param>
         /// <param name="targetBnetMembershipId">The bungie.net user to apply missing offers to. If not self, elevated permissions are required.</param>
+        [HttpPost("Partner/ApplyMissingOffers")]
         public async Task<ActionResult<BasicResponse<bool>>> ApplyMissingPartnerOffersWithoutClaim([FromRoute] int partnerApplicationId, [FromRoute] int targetBnetMembershipId) =>
             Ok(await _helper.ApplyMissingPartnerOffersWithoutClaim(partnerApplicationId, targetBnetMembershipId));
+
+        /// <summary>
+        /// Returns the partner sku and offer history of the targeted user. Elevated permissions are required to see users that are not yourself.
+        /// </summary>
+        /// <remarks>
+        /// Oauth Scope : PartnerOfferGrant
+        /// </remarks>
+        /// <param name="partnerApplicationId">The partner application identifier.</param>
+        /// <param name="targetBnetMembershipId">The bungie.net user to apply missing offers to. If not self, elevated permissions are required.</param>
+        [HttpGet("Partner/History/{partnerApplicationId}/{targetBnetMembershipId}/")]
+        public async Task<ActionResult<BasicResponse<IEnumerable<PartnerOfferSkuHistoryResponse>>>> GetPartnerOfferSkuHistory([FromRoute] int partnerApplicationId, [FromRoute] int targetBnetMembershipId) =>
+            Ok(await _helper.GetPartnerOfferSkuHistory(partnerApplicationId, targetBnetMembershipId));
     }
 }

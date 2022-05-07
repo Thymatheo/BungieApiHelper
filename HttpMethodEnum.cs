@@ -1,7 +1,5 @@
-﻿namespace BungieApiHelper
-{
-    public enum HttpMethodEnum
-    {
+﻿namespace BungieApiHelper {
+    public enum HttpMethodEnum {
         POST,
         GET
     }

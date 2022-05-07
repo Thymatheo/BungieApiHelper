@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BungieApiHelper.Entity.User {
+﻿namespace BungieApiHelper.Entity.User {
     public class UserMembership {
         /// <summary>
         /// Type of the membership. Not necessarily the native type.

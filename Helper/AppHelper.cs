@@ -2,16 +2,12 @@
 using BungieApiHelper.Entity.Application;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace BungieApiHelper.Helper
-{
-    public class AppHelper : BasicHelper
-    {
+namespace BungieApiHelper.Helper {
+    public class AppHelper : BasicHelper {
         public AppHelper() : base("App") { }
-        public async Task<BasicResponse<ApiUsage>> GetApplicationApiUsage(int appId, DateTime? start, DateTime? end)
-        {
+        public async Task<BasicResponse<ApiUsage>> GetApplicationApiUsage(int appId, DateTime? start, DateTime? end) {
             List<QueryParam> param = new List<QueryParam>();
             if (start.HasValue)
                 param.Add(new QueryParam() { Label = "start", Value = start.Value });

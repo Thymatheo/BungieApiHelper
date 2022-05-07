@@ -1,8 +1,6 @@
 ﻿using BungieApiHelper.Entity;
 using BungieApiHelper.Entity.Tokens;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BungieApiHelper.Helper.Auth {

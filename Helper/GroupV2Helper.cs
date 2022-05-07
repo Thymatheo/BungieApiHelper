@@ -1,16 +1,11 @@
 ﻿using BungieApiHelper.Entity;
-using BungieApiHelper.Entity.Bungie;
 using BungieApiHelper.Entity.Config;
 using BungieApiHelper.Entity.GroupsV2;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace BungieApiHelper.Helper
-{
-    public class GroupV2Helper : BasicHelper
-    {
+namespace BungieApiHelper.Helper {
+    public class GroupV2Helper : BasicHelper {
         public GroupV2Helper() : base("GroupV2") { }
 
         /// <summary>
@@ -67,15 +62,15 @@ namespace BungieApiHelper.Helper
         /// <param name="currentpage">Page number (starting with 1). Each page has a fixed size of 50 items per page.</param>
         /// <param name="memberType">Filter out other member types. Use None for all members.</param>
         /// <param name="nameSearch">The name fragment upon which a search should be executed for members with matching display or unique names.</param>
-        public async Task<BasicResponse<SearchResultOfGroupMember>> Members(int groupId,int currentpage, int memberType, string nameSearch) =>
-            await Get<SearchResultOfGroupMember>($"{groupId}/Members/{currentpage}", BuildQueryParam(new List<QueryParam>() { new QueryParam() { Label = "memberType", Value = memberType }, new QueryParam() { Label = "nameSearch", Value = nameSearch } }));
+        public async Task<BasicResponse<SearchResultOfGroupMember>> Members(int groupId, int currentpage, int memberType, string nameSearch) =>
+            await Get<SearchResultOfGroupMember>($"{groupId}/Members/{currentpage}", queryParam: BuildQueryParam(new() { new() { Label = "memberType", Value = memberType }, new() { Label = "nameSearch", Value = nameSearch } }));
 
         /// <summary>
         /// Get the list of members in a given group who are of admin level or higher.
         /// </summary>
         /// <param name="groupId">Page number (starting with 1). Each page has a fixed size of 50 items per page.</param>
         /// <param name="currentpage">The ID of the group.</param>
-        public async Task<BasicResponse<SearchResultOfGroupMember>> AdminsAndFounder(int groupId,int currentpage) =>
+        public async Task<BasicResponse<SearchResultOfGroupMember>> AdminsAndFounder(int groupId, int currentpage) =>
             await Get<SearchResultOfGroupMember>($"{groupId}/AdminsAndFounder/{currentpage}");
         /// <summary>
         /// Allows a founder to manually recover a group they can see in game but not on bungie.net

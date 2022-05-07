@@ -3,15 +3,12 @@ using BungieApiHelper.Entity.Application;
 using BungieApiHelper.Helper;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BungieApiHelper.Controller
-{
+namespace BungieApiHelper.Controller {
     [ApiExplorerSettings(IgnoreApi = false)]
-    public class AppController : BasicController<AppHelper>
-    {
+    public class AppController : BasicController<AppHelper> {
         /// <summary>
         /// Get API usage by application for time frame specified.
         /// </summary>
@@ -20,16 +17,14 @@ namespace BungieApiHelper.Controller
         /// <param name="start">Start time for query. Goes to 24 hours ago if not specified.</param>
         /// <param name="end">End time for query. Goes to now if not specified.</param>
         [HttpGet("ApiUsage/{appId}")]
-        public async Task<ActionResult<BasicResponse<ApiUsage>>> GetApplicationApiUsage([FromRoute] int appId, [FromQuery] DateTime? start = null, [FromQuery] DateTime? end = null)
-        {
+        public async Task<ActionResult<BasicResponse<ApiUsage>>> GetApplicationApiUsage([FromRoute] int appId, [FromQuery] DateTime? start = null, [FromQuery] DateTime? end = null) {
             return Ok(await _helper.GetApplicationApiUsage(appId, start, end));
         }
         /// <summary>
         /// Get list of applications created by Bungie.
         /// </summary>
         [HttpGet("FirstParty")]
-        public async Task<ActionResult<BasicResponse<IEnumerable<Application>>>> GetBungieApplication()
-        {
+        public async Task<ActionResult<BasicResponse<IEnumerable<Application>>>> GetBungieApplication() {
             return Ok(await _helper.GetBungieApplication());
         }
     }

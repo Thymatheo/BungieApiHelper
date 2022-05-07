@@ -43,7 +43,7 @@ namespace BungieApiHelper.Auth {
             if (_config.ClientType == AuthTypeEnum.Confidential) {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String($"{_config.ClientId}:{_config.ClientSecret}".Select(x => (byte)x).ToArray()));
             }
-            var test =  new FormUrlEncodedContent(content).ReadAsStringAsync().GetAwaiter().GetResult();
+            var test = new FormUrlEncodedContent(content).ReadAsStringAsync().GetAwaiter().GetResult();
             request.Content = new FormUrlEncodedContent(content);
             request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
             return request;

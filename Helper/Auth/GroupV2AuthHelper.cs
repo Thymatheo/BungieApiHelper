@@ -2,7 +2,7 @@
 using BungieApiHelper.Entity.Bungie;
 using BungieApiHelper.Entity.Entities;
 using BungieApiHelper.Entity.GroupsV2;
-using BungieApiHelper.Entity.Unspecified;
+using BungieApiHelper.Entity.Unspecified.SearchResultOf;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -119,7 +119,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="membershipType">Membership ID to modify.</param>
         /// <param name="membershipId">Membership type of the provide membership ID.</param>
         /// <param name="memberType">New membertype for the specified member.</param>
-        public async Task<BasicResponse<int>> SetMembershipType(int groupId, int membershipType, int membershipId, int memberType) =>
+        public async Task<BasicResponse<int>> SetMembershipType(int groupId, BungieMembershipType membershipType, int membershipId, int memberType) =>
             await Post<int>($"{groupId}/Members/{membershipType}/{membershipId}/SetMembershipType/{memberType}", null);
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="groupId">Group ID to kick the user from.</param>
         /// <param name="membershipType">Membership type of the provided membership ID.</param>
         /// <param name="membershipId">Membership ID to kick.</param>
-        public async Task<BasicResponse<GroupMemberLeave>> KickMembers(int groupId, int membershipType, int membershipId) =>
+        public async Task<BasicResponse<GroupMemberLeave>> KickMembers(int groupId, BungieMembershipType membershipType, int membershipId) =>
             await Post<GroupMemberLeave>($"{groupId}/Members/{membershipType}/{membershipId}/Kick", null);
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="groupId">Group ID to kick the user from.</param>
         /// <param name="membershipType">Membership ID of the member to ban from the group.</param>
         /// <param name="membershipId">Membership type of the provided membership ID.</param>
-        public async Task<BasicResponse<int>> BanMembers(int groupId, int membershipType, int membershipId) =>
+        public async Task<BasicResponse<int>> BanMembers(int groupId, BungieMembershipType membershipType, int membershipId) =>
             await Post<int>($"{groupId}/Members/{membershipType}/{membershipId}/Ban", null);
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="groupId">Group ID to kick the user from.</param>
         /// <param name="membershipType">Membership ID of the member to ban from the group.</param>
         /// <param name="membershipId">Membership type of the provided membership ID.</param>
-        public async Task<BasicResponse<int>> UnBanMembers(int groupId, int membershipType, int membershipId) =>
+        public async Task<BasicResponse<int>> UnBanMembers(int groupId, BungieMembershipType membershipType, int membershipId) =>
             await Post<int>($"{groupId}/Members/{membershipType}/{membershipId}/Unban", null);
         /// <summary>
         /// Get the list of banned members in a given group. Only accessible to group Admins and above. Not applicable to all groups. Check group features.
@@ -177,7 +177,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="groupId">The target group id.</param>
         /// <param name="membershipType">Membership type of the provided founderIdNew.</param>
         /// <param name="founderIdNew">The new founder for this group. Must already be a group admin.</param>
-        public async Task<BasicResponse<bool>> AbdicateFoundership(int groupId, int membershipType, int founderIdNew) =>
+        public async Task<BasicResponse<bool>> AbdicateFoundership(int groupId, BungieMembershipType membershipType, int founderIdNew) =>
             await Post<bool>($"{groupId}/Admin/AbdicateFoundership/{membershipType}/{founderIdNew}", null);
         /// <summary>
         /// Get the list of users who are awaiting a decision on their application to join a given group. Modified to include application info.
@@ -188,7 +188,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="groupId">ID of the group.</param>
         /// <param name="currentpage">Page number (starting with 1). Each page has a fixed size of 50 items per page.</param>
         public async Task<BasicResponse<SearchResultOfGroupMemberApplication>> GetPendingMemberships(int groupId, int currentpage = 1) =>
-            await Get<SearchResultOfGroupMemberApplication>($"{groupId}/Members/Pending", $"?currentpage={currentpage}");
+            await Get<SearchResultOfGroupMemberApplication>($"{groupId}/Members/Pending", queryParam: BuildQueryParam(new() { new() { Label = "currentpage", Value = currentpage } }));
 
         /// <summary>
         /// Get the list of users who have been invited into the group.
@@ -199,7 +199,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="groupId">ID of the group.</param>
         /// <param name="currentpage">Page number (starting with 1). Each page has a fixed size of 50 items per page.</param>
         public async Task<BasicResponse<SearchResultOfGroupMemberApplication>> GetInvitedIndividuals(int groupId, int currentpage = 1) =>
-            await Get<SearchResultOfGroupMemberApplication>($"{groupId}/Members/InvitedIndividuals", $"?currentpage={currentpage}");
+            await Get<SearchResultOfGroupMemberApplication>($"{groupId}/Members/InvitedIndividuals", queryParam: BuildQueryParam(new() { new() { Label = "currentpage", Value = currentpage } }));
         /// <summary>
         /// Approve all of the pending users for the given group.
         /// </summary>
@@ -240,7 +240,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="membershipType">Membership type of the supplied membership ID.</param>
         /// <param name="membershipId">The membership id being approved.</param>
         /// <param name="content"></param>
-        public async Task<BasicResponse<EntityActionResult>> ApprovePending(int groupId, int membershipType, int membershipId, GroupApplicationRequest content) =>
+        public async Task<BasicResponse<EntityActionResult>> ApprovePending(int groupId, BungieMembershipType membershipType, int membershipId, GroupApplicationRequest content) =>
             await Post<EntityActionResult>($"{groupId}/Members/Approve/{membershipType}/{membershipId}", content);
         /// <summary>
         /// Deny all of the pending users for the given group that match the passed-in.
@@ -262,7 +262,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="membershipType">Membership id of the account being invited.</param>
         /// <param name="membershipId">MembershipType of the account being invited.</param>
         /// <param name="content"></param>
-        public async Task<BasicResponse<GroupApplicationResponse>> IndividualGroupInvite(int groupId, int membershipType, int membershipId, GroupApplicationRequest content) =>
+        public async Task<BasicResponse<GroupApplicationResponse>> IndividualGroupInvite(int groupId, BungieMembershipType membershipType, int membershipId, GroupApplicationRequest content) =>
             await Post<GroupApplicationResponse>($"{groupId}/Members/IndividualInvite/{membershipType}/{membershipId}", content);
         /// <summary>
         /// Cancels a pending invitation to join a group.
@@ -273,7 +273,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="groupId">ID of the group you would like to join.</param>
         /// <param name="membershipType">Membership id of the account being cancelled.</param>
         /// <param name="membershipId">MembershipType of the account being cancelled.</param>
-        public async Task<BasicResponse<GroupApplicationResponse>> IndividualGroupInviteCancel(int groupId, int membershipType, int membershipId) =>
+        public async Task<BasicResponse<GroupApplicationResponse>> IndividualGroupInviteCancel(int groupId, BungieMembershipType membershipType, int membershipId) =>
             await Post<GroupApplicationResponse>($"{groupId}/Members/IndividualInviteCancel/{membershipType}/{membershipId}", null);
     }
 }

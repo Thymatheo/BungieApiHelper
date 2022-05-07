@@ -1,5 +1,4 @@
-﻿namespace BungieApiHelper.Entity.GroupsV2
-{
+﻿namespace BungieApiHelper.Entity.GroupsV2 {
     /// <summary>
     /// 
     /// </summary>
@@ -15,8 +14,7 @@
     /// If you pass these, you will get a useless InvalidParameters error.
     /// </para>
     /// </remarks>
-    public class GroupQuery
-    {
+    public class GroupQuery {
         public string name { get; set; }
         public int groupType { get; set; }
         public int creationDate { get; set; }

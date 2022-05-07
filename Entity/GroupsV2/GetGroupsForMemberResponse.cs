@@ -1,7 +1,5 @@
-﻿using BungieApiHelper.Entity.Unspecified;
-using System;
+﻿using BungieApiHelper.Entity.Unspecified.SearchResultOf;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BungieApiHelper.Entity.GroupsV2 {
     public class GetGroupsForMemberResponse : SearchResultOf<GroupMembership> {
