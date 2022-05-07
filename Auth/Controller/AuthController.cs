@@ -51,7 +51,7 @@ namespace BungieApiHelper.Auth.Controller {
             AddToken(token);
             if (_config.ClientType == AuthTypeEnum.Confidential)
                 AddRefreshToken(token);
-            return Redirect(_config.IsApiMode ? "https://localhost:44307/swagger" : _config.AppRedirectUrl);
+            return Redirect(_config.AppRedirectUrl);
         }
         [HttpGet("refresh")]
         public async Task<ActionResult> RefreshToken() {
