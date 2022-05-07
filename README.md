@@ -19,8 +19,18 @@ Each Helper will have a associated Api Controller
 There is two type of controller:
 1. Default => No user authentication needed
 2. Auth => User authentication needed
+### Config
+In order for the helper or the controller to work you'll need to set the config object in the Locator class. In addition to that you'll need to set some info to allow the solution to work see picture bellow.
+
+![Config configuration](https://user-images.githubusercontent.com/44467071/167275107-551423b2-7ee3-45b4-814f-e2293c75daec.png)
+
+
 ## How to use ?
+### Download and modify
 1. Download the repo
 2. Add the csproj to your Web Api
 3. Register the lib by using the Locator.AddServiceRequierment();
 4. Use Any EndPointHelper or any Controller
+
+### NuGet
+install the NuGet package from : https://www.nuget.org/packages/BungieApiHelper/
