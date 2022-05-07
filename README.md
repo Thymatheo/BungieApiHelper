@@ -7,14 +7,15 @@ This project is a lib, that allow developer to acces the API of bungie for the g
 ## How does it work ?
 There is three main part of this project
 ### 1: Auth
+This part need and API or a web server in order to work
 For the bungie Authentication process, there is 4 endpoint :
 1. Auth => Endpoint use to init the bungie Auth Process
 2. Auth/Logged => This is the Redirect Url you need to register in your API settings on the Bungie Dev portal (the info like the token will be stored in the web browser cookie)
 3. Auth/Refresh => Use to refresh to Auth token provided by bungie
 4. Auth/loggout => Use to loggout
-### 2: Helper
+### 2: Helper/AppM ode
 For each services provided by bungie there is a matching helper, they'll contain one methode for each endpoint.
-### 3: Controller
+### 3: Controller/Api Mode
 Each Helper will have a associated Api Controller
 There is two type of controller:
 1. Default => No user authentication needed
