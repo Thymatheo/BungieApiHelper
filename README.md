@@ -24,3 +24,7 @@ There is two type of controller:
 2. Add the csproj to your Web Api
 3. Register the lib by using the Locator.AddServiceRequierment();
 4. Use Any EndPointHelper or any Controller
+
+## Using Nuget
+See : https://www.nuget.org/packages/BungieApiHelper/
+
