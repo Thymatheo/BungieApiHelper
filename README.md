@@ -1,5 +1,18 @@
 # BungieApiHelper
 ## Current State [In Dev]
+See https://bungie-net.github.io/multi/index.html for the full list of Bungie API Endpoints
+## Implemented Endpoint
+1. App => fully implmented
+2. User => fully implmented
+3. Content => fully implmented
+4. Forum => fully implmented
+5. GroupV2 => fully implmented
+6. Tokens => fully implmented
+7. Destin2 => partially implmented
+8. CommunityContent => not implmented
+9. Trending => not implmented
+10. Fireteam => not implemted
+11. Social => not implmented
 
 ## About
 This project is a lib, that allow developer to acces the API of bungie for the game destiny 2
