@@ -22,7 +22,7 @@ namespace BungieApiHelper {
             TokenManager.Token = new AuthResponse() {
                 access_token = HttpUtility.UrlDecode(cookies["Bearer"].Value),
                 expires_in = int.Parse(HttpUtility.UrlDecode(cookies["Bearer_Expire"].Value)),
-                refresh_expires_in = int.Parse(.HttpUtility.UrlDecode(cookies["Refresh_Expire"].Value)),
+                refresh_expires_in = int.Parse(HttpUtility.UrlDecode(cookies["Refresh_Expire"].Value)),
                 membership_id = HttpUtility.UrlDecode(cookies["Membership_Id"].Value),
                 token_type = "Bearer",
                 refresh_token = HttpUtility.UrlDecode(cookies["Refresh"].Value),
