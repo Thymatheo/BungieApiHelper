@@ -2,6 +2,7 @@
 using BungieApiHelper.Entity.Bungie;
 using BungieApiHelper.Entity.Config;
 using BungieApiHelper.Entity.Definition;
+using BungieApiHelper.Entity.Destiny;
 using BungieApiHelper.Entity.Responses;
 using BungieApiHelper.Entity.User;
 using BungieApiHelper.Helper;
@@ -65,8 +66,8 @@ namespace BungieApiHelper.Controller {
         /// <param name="membershipType">A valid non-BungieNet membership type.</param>
         /// <param name="destinyMembershipId">Destiny membership ID.</param>
         /// <param name="components">A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.</param>
-        [HttpGet("Destiny2/{membershipType}/Profile/{destinyMembershipId}")]
-        public async Task<ActionResult<BasicResponse<DestinyProfileResponse>>> GetProfile(BungieMembershipType membershipType, string destinyMembershipId, IEnumerable<int> components) =>
+        [HttpPost("Destiny2/{membershipType}/Profile/{destinyMembershipId}")]
+        public async Task<ActionResult<BasicResponse<DestinyProfileResponse>>> GetProfile([FromRoute] BungieMembershipType membershipType, [FromRoute] string destinyMembershipId, [FromBody] List<DestinyComponentType> components) =>
             Ok(await _helper.GetProfile(membershipType, destinyMembershipId, components));
     }
 }

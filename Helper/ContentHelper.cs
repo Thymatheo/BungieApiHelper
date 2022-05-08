@@ -19,11 +19,8 @@ namespace BungieApiHelper.Helper {
         /// Returns a content item referenced by id
         /// </summary>
         public async Task<BasicResponse<ContentItemPublicContract>> GetContentById(int id, string locale, bool head = false) =>
-            await Get<ContentItemPublicContract>($"GetContentById/{id}/{locale}", queryParam: BuildQueryParam(new() {
-                new() {
-                    Label = "head",
-                    Value = head
-                }
+            await Get<ContentItemPublicContract>($"GetContentById/{id}/{locale}", queryParam: BuildQueryParam(new List<QueryParam>() {
+                QueryParam.BuildSingleParam(head, "head")
             }));
 
         /// <summary>
@@ -32,11 +29,8 @@ namespace BungieApiHelper.Helper {
         /// <param name="tag">Tag used on the content to be searched.</param>
         /// <param name="type">Content type tag: Help, News, etc. Supply multiple ctypes separated by space.</param>
         public async Task<BasicResponse<ContentItemPublicContract>> GetContentByTagAndType(string tag, string type, string locale, bool head = false) =>
-            await Get<ContentItemPublicContract>($"GetContentByTagAndType/{tag}/{type}/{locale}", queryParam: BuildQueryParam(new() {
-                new() {
-                    Label = "head",
-                    Value = head
-                }
+            await Get<ContentItemPublicContract>($"GetContentByTagAndType/{tag}/{type}/{locale}", queryParam: BuildQueryParam(new List<QueryParam>() {
+                QueryParam.BuildSingleParam(head, "head")
             }));
 
         /// <summary>
@@ -50,17 +44,14 @@ namespace BungieApiHelper.Helper {
         /// <param name="head"></param>
         public async Task<BasicResponse<SearchResultOfContentItemPublicContract>> Search(string locale, string cType, string searchtext, string tag, int currentPage = 1, string source = "", bool head = false) {
             List<QueryParam> param = new() {
-                new() { Label = "cType", Value = cType },
-                new() { Label = "searchtext", Value = searchtext },
-                new() { Label = "tag", Value = tag },
-                new() { Label = "head", Value = head },
-                new() { Label = "currentPage", Value = currentPage },
+                QueryParam.BuildSingleParam(cType, "cType"),
+                QueryParam.BuildSingleParam(searchtext, "searchtext"),
+                QueryParam.BuildSingleParam(tag, "tag"),
+                QueryParam.BuildSingleParam(head, "head"),
+                QueryParam.BuildSingleParam(currentPage, "currentPage"),
             };
             if (!string.IsNullOrWhiteSpace(source))
-                param.Add(new() {
-                    Label = "source",
-                    Value = source
-                });
+                param.Add(QueryParam.BuildSingleParam(source, "source"));
 
             return await Get<SearchResultOfContentItemPublicContract>($"Search/{locale}", queryParam: BuildQueryParam(param));
         }
@@ -74,10 +65,10 @@ namespace BungieApiHelper.Helper {
         /// <param name="currentPage">Page number for the search results starting with page 1.</param>
         /// <param name="head">Not used.</param>
         public async Task<BasicResponse<SearchResultOfContentItemPublicContract>> SearchContentByTagAndType(string tag, string type, string locale, int itemsperpage, int currentPage = 1, bool head = false) =>
-            await Get<SearchResultOfContentItemPublicContract>($"SearchContentByTagAndType/{tag}/{type}/{locale}", queryParam: BuildQueryParam(new() {
-                new() { Label = "currentPage", Value = currentPage },
-                new() { Label = "head", Value = head },
-                new() { Label = "itemsperpage", Value = itemsperpage }
+            await Get<SearchResultOfContentItemPublicContract>($"SearchContentByTagAndType/{tag}/{type}/{locale}", queryParam: BuildQueryParam(new List<QueryParam>() {
+                QueryParam.BuildSingleParam(currentPage, "currentPage"),
+                QueryParam.BuildSingleParam(head, "head"),
+                QueryParam.BuildSingleParam(itemsperpage, "itemsperpage")
             }));
 
         /// <summary>

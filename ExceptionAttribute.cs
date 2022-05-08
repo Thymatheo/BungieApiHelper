@@ -9,7 +9,10 @@ namespace BungieApiHelper {
         public override void OnException(ExceptionContext context) {
             context.HttpContext.Response.ContentType = "application/json";
             context.Result = new ContentResult {
-                Content = JsonConvert.SerializeObject(JsonConvert.DeserializeObject<BasicResponse<object>>(context.Exception.Message), Formatting.Indented),
+                Content = JsonConvert.SerializeObject(new BasicResponse<object>() {
+                    Response = context.Exception.StackTrace,
+                    Message = context.Exception.Message,
+                }, Formatting.Indented),
                 ContentType = "application/json",
                 StatusCode = (int)500
             };

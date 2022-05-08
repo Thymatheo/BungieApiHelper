@@ -63,7 +63,10 @@ namespace BungieApiHelper.Helper {
         /// <param name="memberType">Filter out other member types. Use None for all members.</param>
         /// <param name="nameSearch">The name fragment upon which a search should be executed for members with matching display or unique names.</param>
         public async Task<BasicResponse<SearchResultOfGroupMember>> Members(int groupId, int currentpage, int memberType, string nameSearch) =>
-            await Get<SearchResultOfGroupMember>($"{groupId}/Members/{currentpage}", queryParam: BuildQueryParam(new() { new() { Label = "memberType", Value = memberType }, new() { Label = "nameSearch", Value = nameSearch } }));
+            await Get<SearchResultOfGroupMember>($"{groupId}/Members/{currentpage}", queryParam: BuildQueryParam(new() {
+                QueryParam.BuildSingleParam(memberType, "memberType"),
+                QueryParam.BuildSingleParam(nameSearch, "nameSearch")
+            }));
 
         /// <summary>
         /// Get the list of members in a given group who are of admin level or higher.

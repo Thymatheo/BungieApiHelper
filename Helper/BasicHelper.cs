@@ -41,14 +41,15 @@ namespace BungieApiHelper.Helper {
         }
         private async Task<BasicResponse<T>> ReadRequestResult<T>(HttpRequestMessage request) {
             using HttpResponseMessage response = await GetClient().SendAsync(request);
-            return JsonConvert.DeserializeObject<BasicResponse<T>>(await response.Content.ReadAsStringAsync(), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, MaxDepth = null });
+            string result = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<BasicResponse<T>>(result, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, MaxDepth = null });
         }
         private HttpClient GetClient() {
             HttpClient client = new();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json") { CharSet = "UTF-8" });
             return client;
         }
-        public static string BuildQueryParam(List<QueryParam> param) =>
+        public static string BuildQueryParam(List<QueryParam> param)=>
             string.Join('&', param.Select(x => x.ToString()));
     }
 }

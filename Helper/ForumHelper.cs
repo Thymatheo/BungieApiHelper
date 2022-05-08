@@ -21,9 +21,9 @@ namespace BungieApiHelper.Helper {
         public async Task<BasicResponse<PostSearchResponse>> GetTopicsPaged(int categoryFilter, int page, int quickDate, byte sort, int group = 0, int pageSize = 0, string locales = "en", string tagstring = "") {
             List<QueryParam> param = new List<QueryParam>()
             {
-                new(){ Label = "locales", Value = locales},
+                QueryParam.BuildSingleParam(locales, "locales"),
             };
-            if (!string.IsNullOrWhiteSpace(tagstring)) param.Add(new() { Label = "tagstring", Value = tagstring });
+            if (!string.IsNullOrWhiteSpace(tagstring)) param.Add(QueryParam.BuildSingleParam(tagstring, "tagstring"));
             return await Get<PostSearchResponse>($"GetTopicsPaged/{page}/{pageSize}/{group}/{sort}/{quickDate}/{categoryFilter}", queryParam: BuildQueryParam(param));
         }
 
@@ -37,10 +37,7 @@ namespace BungieApiHelper.Helper {
         /// <param name="locales">Comma seperated list of locales posts must match to return in the result list. Default 'en'</param>
         public async Task<BasicResponse<PostSearchResponse>> GetCoreTopicsPaged(int categoryFilter, int page, int quickDate, byte sort, string locales = "en") =>
             await Get<PostSearchResponse>($"GetCoreTopicsPaged/{page}/{sort}/{quickDate}/{categoryFilter}", queryParam: BuildQueryParam(new() {
-                new() {
-                    Label = "locales",
-                    Value = locales
-                },
+                QueryParam.BuildSingleParam(locales, "locales")
             }));
 
         /// <summary>
@@ -49,10 +46,7 @@ namespace BungieApiHelper.Helper {
         /// <param name="showbanned">If this value is not null or empty, banned posts are requested to be returned</param>
         public async Task<BasicResponse<PostSearchResponse>> GetPostsThreadedPaged(int parentPostId, int page, int pageSize, int replySize, bool getParentPost, bool rootThreadMode, int sortMode, string showbanned = "") =>
             await Get<PostSearchResponse>($"GetPostsThreadedPaged/{parentPostId}/{page}/{pageSize}/{replySize}/{getParentPost}/{rootThreadMode}/{sortMode}", queryParam: BuildQueryParam(new() {
-                new() {
-                    Label = "showbanned",
-                    Value = showbanned
-                },
+                QueryParam.BuildSingleParam(showbanned, "showbanned"),
             }));
 
         /// <summary>
@@ -61,10 +55,7 @@ namespace BungieApiHelper.Helper {
         /// <param name="showbanned">If this value is not null or empty, banned posts are requested to be returned</param>
         public async Task<BasicResponse<PostSearchResponse>> GetPostsThreadedPagedFromChild(int childPostId, int page, int pageSize, int replySize, bool rootThreadMode, int sortMode, string showbanned = "") =>
             await Get<PostSearchResponse>($"GetPostsThreadedPagedFromChild/{childPostId}/{page}/{pageSize}/{replySize}/{rootThreadMode}/{sortMode}", queryParam: BuildQueryParam(new() {
-                new() {
-                    Label = "showbanned",
-                    Value = showbanned
-                },
+                QueryParam.BuildSingleParam(showbanned, "showbanned"),
             }));
 
         /// <summary>
@@ -73,10 +64,7 @@ namespace BungieApiHelper.Helper {
         /// <param name="showbanned">If this value is not null or empty, banned posts are requested to be returned</param>
         public async Task<BasicResponse<PostSearchResponse>> GetPostAndParent(int childPostId, string showbanned = "") =>
             await Get<PostSearchResponse>($"GetPostAndParent/{childPostId}", queryParam: BuildQueryParam(new() {
-                new() {
-                    Label = "showbanned",
-                    Value = showbanned
-                },
+                QueryParam.BuildSingleParam(showbanned, "showbanned")
             }));
 
         /// <summary>
@@ -86,7 +74,7 @@ namespace BungieApiHelper.Helper {
         public async Task<BasicResponse<PostSearchResponse>> GetPostAndParentAwaitingApproval(int childPostId, string showbanned = "") =>
             await Get<PostSearchResponse>($"GetPostAndParentAwaitingApproval/{childPostId}", queryParam: BuildQueryParam(new()
             {
-                new() { Label = "showbanned", Value = showbanned },
+                QueryParam.BuildSingleParam(showbanned, "showbanned"),
             }));
 
         /// <summary>
@@ -99,7 +87,7 @@ namespace BungieApiHelper.Helper {
         /// Gets tag suggestions based on partial text entry, matching them with other tags previously used in the forums.
         /// </summary>
         public async Task<BasicResponse<TagResponse>> GetForumTagSuggestions(string partialtag) =>
-            await Get<TagResponse>($"GetForumTagSuggestions", BuildQueryParam(new() { new() { Label = "partialtag", Value = partialtag } }));
+            await Get<TagResponse>($"GetForumTagSuggestions", BuildQueryParam(new() { QueryParam.BuildSingleParam(partialtag, "partialtag") }));
 
         /// <summary>
         /// Gets the specified forum poll.

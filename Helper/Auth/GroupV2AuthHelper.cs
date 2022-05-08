@@ -188,7 +188,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="groupId">ID of the group.</param>
         /// <param name="currentpage">Page number (starting with 1). Each page has a fixed size of 50 items per page.</param>
         public async Task<BasicResponse<SearchResultOfGroupMemberApplication>> GetPendingMemberships(int groupId, int currentpage = 1) =>
-            await Get<SearchResultOfGroupMemberApplication>($"{groupId}/Members/Pending", queryParam: BuildQueryParam(new() { new() { Label = "currentpage", Value = currentpage } }));
+            await Get<SearchResultOfGroupMemberApplication>($"{groupId}/Members/Pending", queryParam: BuildQueryParam(new List<QueryParam>() { QueryParam.BuildSingleParam(currentpage, "currentpage") }));
 
         /// <summary>
         /// Get the list of users who have been invited into the group.
@@ -199,7 +199,7 @@ namespace BungieApiHelper.Helper.Auth {
         /// <param name="groupId">ID of the group.</param>
         /// <param name="currentpage">Page number (starting with 1). Each page has a fixed size of 50 items per page.</param>
         public async Task<BasicResponse<SearchResultOfGroupMemberApplication>> GetInvitedIndividuals(int groupId, int currentpage = 1) =>
-            await Get<SearchResultOfGroupMemberApplication>($"{groupId}/Members/InvitedIndividuals", queryParam: BuildQueryParam(new() { new() { Label = "currentpage", Value = currentpage } }));
+            await Get<SearchResultOfGroupMemberApplication>($"{groupId}/Members/InvitedIndividuals", queryParam: BuildQueryParam(new List<QueryParam>() { QueryParam.BuildSingleParam(currentpage, "currentpage") }));
         /// <summary>
         /// Approve all of the pending users for the given group.
         /// </summary>

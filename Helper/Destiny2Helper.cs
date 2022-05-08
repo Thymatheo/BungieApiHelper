@@ -2,9 +2,12 @@
 using BungieApiHelper.Entity.Bungie;
 using BungieApiHelper.Entity.Config;
 using BungieApiHelper.Entity.Definition;
+using BungieApiHelper.Entity.Destiny;
 using BungieApiHelper.Entity.Responses;
 using BungieApiHelper.Entity.User;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BungieApiHelper.Helper {
@@ -49,7 +52,7 @@ namespace BungieApiHelper.Helper {
         /// <param name="membershipId">The type for the membership whose linked Destiny accounts you want returned.</param>
         /// <param name="getAllMemberships">(optional) if set to 'true', all memberships regardless of whether they're obscured by overrides will be returned. Normal privacy restrictions on account linking will still apply no matter what.</param>
         public async Task<BasicResponse<DestinyLinkedProfilesResponse>> GetLinkedProfiles(BungieMembershipType membershipType, string membershipId, bool getAllMemberships = true) =>
-            await Get<DestinyLinkedProfilesResponse>($"{membershipType}/Profile/{membershipId}/LinkedProfiles", queryParam: BuildQueryParam(new() { new() { Label = "getAllMemberships", Value = getAllMemberships } }));
+            await Get<DestinyLinkedProfilesResponse>($"{membershipType}/Profile/{membershipId}/LinkedProfiles", queryParam: BuildQueryParam(new List<QueryParam>() { QueryParam.BuildSingleParam(getAllMemberships, "getAllMemberships") }));
 
         /// <summary>
         /// Returns Destiny Profile information for the supplied membership.
@@ -57,8 +60,9 @@ namespace BungieApiHelper.Helper {
         /// <param name="membershipType">A valid non-BungieNet membership type.</param>
         /// <param name="destinyMembershipId">Destiny membership ID.</param>
         /// <param name="components">A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.</param>
-        public async Task<BasicResponse<DestinyProfileResponse>> GetProfile(BungieMembershipType membershipType, string destinyMembershipId, IEnumerable<int> components) =>
-            await Get<DestinyProfileResponse>($"Destiny2/{membershipType}/Profile/{destinyMembershipId}", queryParam: BuildQueryParam(new() { new() { Label = "components", Value = components } }));
+        public async Task<BasicResponse<DestinyProfileResponse>> GetProfile(BungieMembershipType membershipType, string destinyMembershipId, IEnumerable<DestinyComponentType> components) =>
+             await Get<DestinyProfileResponse>($"{membershipType}/Profile/{destinyMembershipId}", queryParam: BuildQueryParam(new() { QueryParam.BuildMultipleParam(components.Select(x => ((int)x).ToString()), "components") }));
+        
         /// <summary>
         /// Returns character information for the supplied character.
         /// </summary>
@@ -66,7 +70,7 @@ namespace BungieApiHelper.Helper {
         /// <param name="destinyMembershipId">Destiny membership ID.</param>
         /// <param name="characterId">ID of the character.</param>
         /// <param name="components">A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.</param>
-        public async Task<BasicResponse<DestinyProfileResponse>> GetCharacter(BungieMembershipType membershipType, string destinyMembershipId, int characterId, IEnumerable<int> components) =>
-            await Get<DestinyProfileResponse>($"{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}", queryParam: BuildQueryParam(new() { new() { Label = "components", Value = components } }));
+        public async Task<BasicResponse<DestinyCharacterResponse>> GetCharacter(BungieMembershipType membershipType, string destinyMembershipId, int characterId, IEnumerable<DestinyComponentType> components) =>
+            await Get<DestinyCharacterResponse>($"{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}", queryParam: BuildQueryParam(new() { QueryParam.BuildMultipleParam(components.Select(x => ((int)x).ToString()), "components") }));
     }
 }

@@ -35,7 +35,23 @@ namespace BungieApiHelper.Entity.Responses {
         /// </para>
         /// </remarks>
         public SingleComponentResponseOfDestinyKiosksComponent profileKiosks { get; set; }
+        /// <summary>
+        /// When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more info), this is the set of plugs and their states that are profile-scoped.
+        /// </summary>
+        /// <remarks>
+        /// This comes back with ItemSockets, as it is needed for a complete picture of the sockets on requested items.
+        /// <para>
+        /// COMPONENT TYPE: ItemSockets
+        /// </para>
+        /// </remarks>
         public SingleComponentResponseOfDestinyPlugSetsComponent profilePlugSets { get; set; }
+        /// <summary>
+        /// When we have progression information - such as Checklists - that may apply profile-wide, it will be returned here rather than in the per-character progression data.
+        /// </summary>
+        /// <remarks>
+        /// COMPONENT TYPE: ProfileProgression
+        /// </remarks>
+        public SingleComponentResponseOfDestinyProfileProgressionComponent profileProgression { get; set; }
 
     }
 }
