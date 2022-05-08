@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BungieApiHelper", "BungieApiHelper.csproj", "{CB4C3B02-1F90-44FD-AA91-2075D5C55A98}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BungieAPIHelperAPI", "..\BungieAPIHelperAPI\BungieAPIHelperAPI.csproj", "{926AD4C3-0088-4169-8DC7-0FBC81B913EC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
