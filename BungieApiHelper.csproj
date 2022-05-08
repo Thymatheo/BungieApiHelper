@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\C#\BungieApiHelper\BungieApiHelper.xml</DocumentationFile>
+    <DocumentationFile>BungieApiHelper.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
