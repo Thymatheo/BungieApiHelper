@@ -27,8 +27,8 @@ namespace BungieApiHelper.Helper {
         /// </remarks>
         /// <param name="entityType">The type of entity for whom you would like results. These correspond to the entity's definition contract name. For instance, if you are looking for items, this property should be 'DestinyInventoryItemDefinition'. PREVIEW: This endpoint is still in beta, and may experience rough edges. The schema is tentatively in final form, but there may be bugs that prevent desirable operation.</param>
         /// <param name="hashIdentifier">The hash identifier for the specific Entity you want returned.</param>
-        public async Task<BasicResponse<DestinyDefinition>> Manifest(string entityType, int hashIdentifier) =>
-            await Get<DestinyDefinition>($"Manifest/{entityType}/{hashIdentifier}");
+        public async Task<BasicResponse<T>> Manifest<T>(string entityType, int hashIdentifier) where T : DestinyDefinition =>
+            await Get<T>($"Manifest/{entityType}/{hashIdentifier}");
         /// <summary>
         /// Returns a list of Destiny memberships given a global Bungie Display Name. This method will hide overridden memberships due to cross save.
         /// </summary>
@@ -62,7 +62,7 @@ namespace BungieApiHelper.Helper {
         /// <param name="components">A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.</param>
         public async Task<BasicResponse<DestinyProfileResponse>> GetProfile(BungieMembershipType membershipType, string destinyMembershipId, IEnumerable<DestinyComponentType> components) =>
              await Get<DestinyProfileResponse>($"{membershipType}/Profile/{destinyMembershipId}", queryParam: BuildQueryParam(new() { QueryParam.BuildMultipleParam(components.Select(x => ((int)x).ToString()), "components") }));
-        
+
         /// <summary>
         /// Returns character information for the supplied character.
         /// </summary>

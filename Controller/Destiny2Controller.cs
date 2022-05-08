@@ -31,7 +31,7 @@ namespace BungieApiHelper.Controller {
         /// <param name="hashIdentifier">The hash identifier for the specific Entity you want returned.</param>
         [HttpGet("Manifest/{entityType}/{hashIdentifier}/")]
         public async Task<ActionResult<BasicResponse<DestinyDefinition>>> Manifest([FromRoute] string entityType, [FromRoute] int hashIdentifier) =>
-            Ok(await _helper.Manifest(entityType, hashIdentifier));
+            Ok(await _helper.Manifest<DestinyDefinition>(entityType, hashIdentifier));
 
         /// <summary>
         /// Returns a list of Destiny memberships given a global Bungie Display Name. This method will hide overridden memberships due to cross save.
